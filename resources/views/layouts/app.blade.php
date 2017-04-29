@@ -13,6 +13,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
 
     <!-- Scripts -->
     <script>
@@ -20,6 +24,9 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+
+     @yield('styles')
+
 </head>
 <body>
     <div id="app">

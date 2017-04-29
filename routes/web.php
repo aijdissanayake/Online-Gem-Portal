@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//use app/Http/Controllers/Auth/RegisterController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,7 +28,12 @@ Route::group(['middleware' => 'shop'], function () {
 Route::group(['middleware' => 'buyer'], function () {
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/update', function () {return view ('auth/update');})->name('update_view')->middleware('auth.basic');
+	Route::post('/update','UserUpdateController@updateUser')->name('update');
+});
+
 // Route::get('/admin/home', function(){ return view('admin/home');});
 // Route::get('/shop/home', function(){ return view('shop/home');});
 // Route::get('/buyer/home', function(){ return view('buyer/home');});
