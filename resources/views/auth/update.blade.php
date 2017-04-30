@@ -2,7 +2,16 @@
 
 @section('styles')
 
-    <script type="text/javascript" src="/js/toggle.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#reset').hide();
+            $("#check").click(function(evt){
+               evt.stopImmediatePropagation();
+                console.log('inside');
+               $('#reset').toggle(); 
+            });
+        });
+    </script>
 
 @endsection
 
@@ -13,6 +22,15 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('update') }}">
                         {{ csrf_field() }}
 
@@ -45,12 +63,11 @@
 
                             <div class="col-md-6">
                                 <input id="tel" type="number" class="form-control" name="tel" value="{{Auth::user()->tel}}" >
-                                {{Auth::user()->tel}}
                             </div>
                         </div>
 
-                        <div class="checkbox" id="check">
-                            <label><input type="checkbox" name="reset_password"> Reset Passord</label>
+                        <div class="checkbox" >
+                            <label><input type="checkbox" id="check" name="reset_password"> Reset Password</label>
                         </div>
 
                         <div id="reset">
@@ -58,7 +75,7 @@
                                 <label for="password" class="col-md-4 control-label">Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" required>
+                                    <input id="password" type="password" class="form-control" name="password" >
                                 </div>
                             </div>
 
@@ -66,7 +83,7 @@
                                 <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
                                 </div>
                             </div>
                         </div>

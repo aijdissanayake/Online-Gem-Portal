@@ -30,8 +30,10 @@ Route::group(['middleware' => 'buyer'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/home', 'HomeController@index')->name('home');
-	Route::get('/update', function () {return view ('auth/update');})->name('update_view')->middleware('auth.basic');
+	Route::get('/update',function () {return view ('auth/update');})->name('update_view')->middleware('auth.basic');
 	Route::post('/update','UserUpdateController@updateUser')->name('update');
+	Route::get('/profile','UserUpdateController@viewProfile')->name('profile_view');
+
 });
 
 // Route::get('/admin/home', function(){ return view('admin/home');});

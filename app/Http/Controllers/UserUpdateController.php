@@ -5,21 +5,42 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UserUpdateController extends Controller
-{
+{   
+    public function viewProfile(){
+        return view('profile');
+    }
     public function updateUser(Request $request){
 
     	$user = Auth::user();
-        Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+
+
+
+        $validator = Validator::make($request->all(), [
+            'email' => [
+                'required','email','max:255',
+                Rule::unique('users')->ignore($user->id),
+            ],
+            'tel' => [
+                'size:9'
+            ],
+
         ]);
 
+        if ($validator->fails()) {
+            return redirect('/update')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         if($request['reset_password']){
-           Validator::make($request, [
-            'password' => 'required|string|min:6|confirmed',
-        ]); 
+            
+
+            $this->validate($request, [
+                'password' => 'required|string|min:6|confirmed',
+            ]);
         }
 
         $user = Auth::user();
