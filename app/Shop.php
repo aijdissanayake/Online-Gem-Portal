@@ -13,4 +13,8 @@ class Shop extends Model
     public function gemTypes(){
     	return $this->hasMany('App\GemType');
     }
+
+    public function gemTypes(){
+    	return $this->hasMany('App\GemSize');
+    }
 }

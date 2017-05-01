@@ -45,6 +45,8 @@ Route::group(['middleware' => 'auth'], function () {
 		//ajax routes
 		Route::get('/shop/add-type','ShopController@addType')->name('add_type');
 		Route::get('/shop/remove-type','ShopController@removeType')->name('remove_type');
+		Route::get('/shop/add-size','ShopController@addSize')->name('add_size');
+		Route::get('/shop/remove-size','ShopController@removeSize')->name('remove_size');
 	});
 
 	//buyer routes
