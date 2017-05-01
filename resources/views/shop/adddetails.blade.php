@@ -32,18 +32,7 @@
 
 </style>
 
-<script type="text/javascript">
-
-	$(document).ready(function () {
-	    $('button').click(function () {
-	        $('#types').append("<li class='type'>" + $("input[name=task]").val() + " <a href='#' class='close' aria-hidden='true'>&times;</a></li>");
-	    });
-	    $("body").on('click', '#todo a', function () {
-	        $(this).closest("ul").remove();
-	    });
-	});
-
-</script>
+<script type="text/javascript" src="/js/shop.js"></script>
 
 @endsection
 
@@ -51,19 +40,26 @@
 
 <div class="container">
     <div class="row">
+
     	<div class = "col-md-6">
 	        <div class="col-md-8 col-md-offset-2">
 			    <div class="form-group">
 			      <h1>Gem <small>Types</small></h1>
 			    <form role="form">
-			        <input type="text" class="form-control" placeholder="Your Task" name="task">
+			        <input type="text" class="form-control" placeholder="Add Type" name="type" id="type">
 			    </form>
-			    <button type="button" class="btn btn btn-primary">Add</button>
+			    <button type="button" class="btn btn btn-primary" id="type_button">Add</button>
 			        </div>
-			    <ul class="list-unstyled"  id="types"></ul>
+			    <ul class="list-unstyled"  id="types">
+			    	@foreach(\App\GemType::where('shop_id',Auth::user()->id)->where('active',TRUE)->where('deleted',FALSE)->get() as $type)
+			    		<li class='type' typeID = '{{$type->id}}' > {{$type->type}} <a href='#' class='close' aria-hidden='true'>&times;</a></li>
+			    	@endforeach
+			    </ul>
 			</div>
-			<div style="border-left:thin solid black"></div>
+
+
 		</div>
+
 		<div class = "col-md-6">
 	        <div class="col-md-8 col-md-offset-2">
 			    <div class="form-group">
@@ -76,6 +72,7 @@
 			    <ul class="list-unstyled" id="todo2" ></ul>
 			</div>
 		</div>
+
 	</div>
 </div>
 

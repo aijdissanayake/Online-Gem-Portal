@@ -39,7 +39,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 	//shop routes
 	Route::group(['middleware' => 'shop'], function () {
+
 		Route::get('/shop/add-details','ShopController@addDetails')->name('add_details');
+
+		//ajax routes
+		Route::get('/shop/add-type','ShopController@addType')->name('add_type');
+		Route::get('/shop/remove-type','ShopController@removeType')->name('remove_type');
 	});
 
 	//buyer routes
