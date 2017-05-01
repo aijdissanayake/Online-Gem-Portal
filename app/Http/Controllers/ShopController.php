@@ -66,7 +66,7 @@ class ShopController extends Controller
     								->with('size',$size);
 
     }
-
+    //check for other types than jpg
     public function getImage($id){
     	$gemStone = GemStone::find($id);
     	$path = '/shops/'.$gemStone->shop->id.
