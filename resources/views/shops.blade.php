@@ -10,17 +10,9 @@
   <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
-<body style="background-color: #f5f8fa">
+<body>
   @include('layouts/navbar')
   <div class="container">
-  <!-- <div style="display: inline;">
-    <label style=" background-color: #C0C0C0">
-      <a href="{{route('all_shops')}}">  Shops </a> 
-    </label> |      
-    <label>
-      <a href="{{route('all_buyers')}}"> Buyers </a>
-    </label>
-  </div> -->
   <div class="row header">
     <h1 align="center"> <b>Visit Shops</b></h1>
   </div>

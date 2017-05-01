@@ -42,6 +42,14 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::get('/shop/add-details','ShopController@addDetails')->name('add_details');
 
+		Route::get('/shop/advertise','ShopController@advertiseForm')->name('advertise_form');
+
+		Route::post('/shop/advertisement','ShopController@advertise')->name('advertise');
+
+		Route::get('/shop/gem-stone/{id}','ShopController@gemStone')->name('gem_stone');
+
+		Route::get('/shop/download-gem-image/{id}','ShopController@getImage')->name('get_image');
+
 		//ajax routes
 		Route::get('/shop/add-type','ShopController@addType')->name('add_type');
 		Route::get('/shop/remove-type','ShopController@removeType')->name('remove_type');

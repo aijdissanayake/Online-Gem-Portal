@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\GemType;
 use App\GemSize;
+use App\GemStone;
 use Auth;
 
 class ShopController extends Controller
@@ -64,7 +66,7 @@ class ShopController extends Controller
     								->with('size',$size);
 
     }
-    //to make it avalable in img src
+
     public function getImage($id){
     	$gemStone = GemStone::find($id);
     	$path = '/shops/'.$gemStone->shop->id.
@@ -80,7 +82,7 @@ class ShopController extends Controller
 
     	$type = $request['type'];
     	$newType = new GemType();
-    	$newType->shop_id=Auth::user()->id;
+    	$newType->shop_id=Auth::user()->shop->id;
     	$newType->type = $type;
     	$newType->active = true;
     	$newType->save();
@@ -108,7 +110,7 @@ class ShopController extends Controller
 
     	$size = $request['size'];
     	$newSize= new GemSize();
-    	$newSize->shop_id=Auth::user()->id;
+    	$newSize->shop_id=Auth::user()->shop->id;
     	$newSize->size = $size;
     	$newSize->active = true;
     	$newSize->save();
