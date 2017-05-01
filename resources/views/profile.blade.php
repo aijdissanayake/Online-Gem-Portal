@@ -10,7 +10,7 @@
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<div class="row" >
-					<h3 class="panel-title col-xs-10">{{Auth::user()->name}}</h3>
+					<h2 class="panel-title col-xs-10"><b>User Profile</b></h2>
 					<span class="col-xs-2">
 						<a href="{{route('update_view')}}" data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"> Edit</i></a>
 					</span>
@@ -30,7 +30,7 @@
 		              <div class=" col-md-9 col-lg-9 "> 
 		              	<table class="table table-user-information">
 		              		<tbody>
-		              			<tr>
+		              			<!-- <tr>
 		              				<td>Department:</td>
 		              				<td>Programming</td>
 		              			</tr>
@@ -41,12 +41,12 @@
 		              			<tr>
 		              				<td>Date of Birth</td>
 		              				<td>01/24/1988</td>
-		              			</tr>
+		              			</tr> -->
 
 		              			<tr>
 		              				<tr>
-		              					<td>Gender</td>
-		              					<td>Female</td>
+		              					<td>Name</td>
+		              					<td>{{Auth::user()->name}}</td>
 		              				</tr>
 		              				<tr>
 		              					<td>Address</td>

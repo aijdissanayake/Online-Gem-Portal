@@ -58,7 +58,7 @@
 					<button type="button" class="btn btn btn-primary" id="type_button">Add</button>
 				</div>
 				<ul class="list-unstyled"  id="types">
-					@foreach(\App\GemType::where('shop_id',Auth::user()->id)->where('active',TRUE)->where('deleted',FALSE)->get() as $type)
+					@foreach(\App\GemType::where('shop_id',Auth::user()->shop->id)->where('active',TRUE)->where('deleted',FALSE)->get() as $type)
 					<li class='type-size' typeID = '{{$type->id}}' > {{$type->type}} <a href='#' class='close' aria-hidden='true'>&times;</a></li>
 					@endforeach
 				</ul>
@@ -77,7 +77,7 @@
 					<button type="button" class="btn btn btn-primary" id="size_button">Add</button>
 				</div>
 				<ul class="list-unstyled" id="sizes" >
-					@foreach(\App\GemSize::where('shop_id',Auth::user()->id)->where('active',TRUE)->where('deleted',FALSE)->get() as $size)
+					@foreach(\App\GemSize::where('shop_id',Auth::user()->shop->id)->where('active',TRUE)->where('deleted',FALSE)->get() as $size)
 					<li class='type-size' sizeID = '{{$size->id}}' > {{$size->size}} <a href='#' class='close' aria-hidden='true'>&times;</a></li>
 					@endforeach
 				</ul>

@@ -103,13 +103,16 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
+                        <div class="panel-footer">
+                            <div class="form-group" >
+                                <div class="col-md-4 col-md-offset-8" style="float: right;">
+                                    <button type="submit" class="btn btn-primary">
+                                        Register
+                                    </button>
+                                </div>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>

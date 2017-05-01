@@ -41,9 +41,9 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li> <a href="{{route('add_details')}}"> Add Detail </a> </li>
-                                    <li> <a href="{{route('update_view')}}"> Advertise</a></li>
+                                    <li> <a href="{{route('advertise_form')}}"> Advertise</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li> <a href="{{route('update_view')}}"> View All</a></li>
+                                    <li> <a href="{{route('advertise_form')}}"> View All</a></li>
                                 </ul>
 
                             @endif
