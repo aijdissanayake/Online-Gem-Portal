@@ -10,30 +10,56 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//use app/Http/Controllers/Auth/RegisterController;
 
+
+//non-auth routes
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
 
-//admin routes
-Route::group(['middleware' => 'admin'], function () {
-});
-//shop routes
-Route::group(['middleware' => 'shop'], function () {
-});
-//buyer routes
-Route::group(['middleware' => 'buyer'], function () {
-});
-
+//auth routes
 Route::group(['middleware' => 'auth'], function () {
-	Route::get('/home', 'HomeController@index')->name('home');
-	Route::get('/update',function () {return view ('auth/update');})->name('update_view')->middleware('auth.basic');
-	Route::post('/update','UserUpdateController@updateUser')->name('update');
-	Route::get('/profile','UserUpdateController@viewProfile')->name('profile_view');
 
+	//admin routes
+	Route::group(['middleware' => 'admin'], function () {
+
+		Route::get('/admin/de-activate/{id}','UserController@deActivate')->name('de_activate');
+
+		Route::get('/admin/all-buyers',function () {
+	    	return view('admin/buyers');
+		})->name('all_buyers');
+
+		Route::get('/admin/all-shops',function () {
+	    	return view('admin/shops');
+		})->name('all_shops');
+
+	});
+
+	//shop routes
+	Route::group(['middleware' => 'shop'], function () {
+		Route::get('/shop/add-details','ShopController@addDetails')->name('add_details');
+	});
+
+	//buyer routes
+	Route::group(['middleware' => 'buyer'], function () {
+	});
+
+
+
+	Route::get('/home', 'HomeController@index')->name('home');
+
+	Route::get('/update',function () {
+		return view ('auth/update');
+	})->name('update_view')->middleware('auth.basic');
+
+	Route::get('/profile','UserController@viewProfile')->name('profile_view');
+
+	Route::post('/update','UserController@updateUser')->name('update');
+
+	Route::get('/visit-shops','ShopController@visitShops')->name('visit_shops');
+	
 });
 
 // Route::get('/admin/home', function(){ return view('admin/home');});

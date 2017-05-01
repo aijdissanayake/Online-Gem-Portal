@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use App\User;
 
-class UserUpdateController extends Controller
+class UserController extends Controller
 {   
     public function viewProfile(){
         return view('profile');
@@ -53,8 +54,15 @@ class UserUpdateController extends Controller
         }
         $user->save();
 
-        return redirect()->route('home');
+        return redirect()->route('profile_view');
 
+
+    }
+    public function deActivate($id){
+        $user = User::find($id);
+        $user->active = (!$user->active);
+        $user->save();
+        return back();
 
     }
 }
