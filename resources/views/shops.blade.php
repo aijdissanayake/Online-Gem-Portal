@@ -19,17 +19,17 @@
   <table id="myTable" class="table table-striped" >  
     <thead>  
       <tr>
-        <th>Name</th>  
+        <th style="display: none;">Name</th>  
       </tr>  
     </thead>  
     <tbody>
       @foreach(App\User::where('role','shop')->where('active',TRUE)->get() as $user)  
       <tr> 
-        <td><h3><b><a href="#">{{$user->name}}</a><b></h3>
+        <td><h3><b><a href="#">{{$user->name}}</a></b></h3>
           @if($user->id == Auth::user()->id)
           <a href="{{route('update')}}">[Edit]</a><br>
           @endif
-          {{$user->address}}<br>  
+          <b>{{$user->address}}</b><br>  
           <div> Contact Info : T.P. {{$user->tel}}<br>  
             &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;E-mail: {{$user->email}}<br>
           </div>
