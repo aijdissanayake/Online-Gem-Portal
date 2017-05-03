@@ -46,7 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::post('/shop/advertisement','ShopController@advertise')->name('advertise');
 
-		Route::get('/shop/gem-stone/{id}','ShopController@gemStone')->name('gem_stone');
+		
 
 		Route::get('/shop/download-gem-image/{id}','ShopController@getImage')->name('get_image');
 
@@ -86,6 +86,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/visit-shops','ShopController@visitShops')->name('visit_shops');
 
 	Route::get('/search/gems','ShopController@searchGems')->name('search_gems');
+
+	Route::get('/gem-stone/{id}','ShopController@gemStone')->name('gem_stone');
 	
 });
 

@@ -46,17 +46,19 @@
 		          </div>
 		      </div>
 		      <div class="panel-footer">
-		      	<a data-original-title="View all gems" data-toggle="tooltip" type="button" class="btn btn-sm "><i style="font-size:1.5em;" class="glyphicon glyphicon-th-list"></i></a>
-		      	<span class="pull-right">
-		      		<a href="{{route('view_update_gem_stone',['id' => $gemStone->id])}}" data-original-title="Edit this user" data-toggle="tooltip" type="button" 
-		      		class="btn btn-sm"><i style="font-size:1.5em;" class="glyphicon glyphicon-pencil"></i></a>
-		      		@if($gemStone->active)
-		      			<a href="{{route('de_activate_gem_stone',['id' => $gemStone->id])}}" data-original-title="Deactivate this gem stone" data-toggle="tooltip" type="button" class="btn btn-sm "><i style="font-size:1.5em;" class="glyphicon glyphicon-eye-close"></i></a>
-		      		@else
-		      			<a href="{{route('de_activate_gem_stone',['id' => $gemStone->id])}}" data-original-title="Activate this gem stone" data-toggle="tooltip" type="button" class="btn btn-sm "><i style="font-size:1.5em;" class="glyphicon glyphicon-eye-open"></i></a>
-		      		@endif
-		      		<a href="{{route('delete_gem_stone',['id' => $gemStone->id])}}" data-original-title="Remove this gemstone" data-toggle="tooltip" type="button" class="btn btn-sm "><i style="font-size:1.5em;" class="glyphicon glyphicon-trash"></i></a>
-		      	</span>
+		      	<a href="{{route('search_gems')}}" data-original-title="View all gems" data-toggle="tooltip" type="button" class="btn btn-sm "><i style="font-size:1.5em;" class="glyphicon glyphicon-th-list"></i></a>
+		      	@if(Auth::user()->id == $gemStone->shop->user->id)
+			      	<span class="pull-right">
+			      		<a href="{{route('view_update_gem_stone',['id' => $gemStone->id])}}" data-original-title="Edit this user" data-toggle="tooltip" type="button" 
+			      		class="btn btn-sm"><i style="font-size:1.5em;" class="glyphicon glyphicon-pencil"></i></a>
+			      		@if($gemStone->active)
+			      			<a href="{{route('de_activate_gem_stone',['id' => $gemStone->id])}}" data-original-title="Deactivate this gem stone" data-toggle="tooltip" type="button" class="btn btn-sm "><i style="font-size:1.5em;" class="glyphicon glyphicon-eye-close"></i></a>
+			      		@else
+			      			<a href="{{route('de_activate_gem_stone',['id' => $gemStone->id])}}" data-original-title="Activate this gem stone" data-toggle="tooltip" type="button" class="btn btn-sm "><i style="font-size:1.5em;" class="glyphicon glyphicon-eye-open"></i></a>
+			      		@endif
+			      		<a href="{{route('delete_gem_stone',['id' => $gemStone->id])}}" data-original-title="Remove this gemstone" data-toggle="tooltip" type="button" class="btn btn-sm "><i style="font-size:1.5em;" class="glyphicon glyphicon-trash"></i></a>
+			      	</span>
+		      	@endif
 		      </div>
 		  </div>
 		</div>

@@ -32,6 +32,7 @@
                         @else
                             <li> <a href="{{route('home')}}"> Home </a> </li>
                             <li> <a href="{{route('visit_shops')}}"> Shops </a> </li>
+                            <li> <a href="{{route('search_gems')}}"> Gems </a> </li>
 
                             @if(Auth::user()->role != 'buyer')
                                 <li class="dropdown">

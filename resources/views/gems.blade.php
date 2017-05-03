@@ -36,7 +36,8 @@
 									<img alt="Gem Stone Pic" src="{{route('get_image',['id' => $gemStone->id])}} " class="img-circle img-responsive">
 								</div>
 								<div class="col-sm-9">
-								<h3><b><a href="#">{{$gemStone->type()->ype}}</a></b></h3>
+								<h3><b><a href="{{route('gem_stone',['id' => $gemStone->id])}}">{{$gemStone->type->type}}</a></b></h3>
+								<b>{{$gemStone->shop->user->name}}</b><br>
 								@if($gemStone->shop->user->id == Auth::user()->id)
 								<a href="{{route('view_update_gem_stone',['id' => $gemStone->id])}}">[Edit]</a><br>
 								@endif
@@ -55,7 +56,7 @@
 				@endif
 				@endforeach
 				@if($count%2)
-					<td>extra cell when odd</td>
+					<td></td>
 					</tr>
 				@endif
 			</tbody>  
