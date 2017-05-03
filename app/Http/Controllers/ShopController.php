@@ -7,12 +7,18 @@ use Illuminate\Support\Facades\Storage;
 use App\GemType;
 use App\GemSize;
 use App\GemStone;
+use App\Shop;
 use Auth;
 
 class ShopController extends Controller
 {
     public function visitShops(){
     	return view('shops');
+    }
+
+    public function visitShop($id){
+        $shop = Shop::find($id);
+        return view('shop')->with('shop',$shop);
     }
 
     public function addDetails(){
@@ -122,14 +128,14 @@ class ShopController extends Controller
 
     }
 
-    public function deleteGemStone($id){
+    public function deleteGemStone($shop_id, $id){
 
-        $type = GemType::find($id);
-        $type->active = false;
-        $type->deleted = true;
-        $type->save();
+        $gemStone = GemStone::find($id);
+        $gemStone->active = false;
+        $gemStone->deleted = true;
+        $gemStone->save();
 
-        return redirect()->route('home');
+        return redirect()->route('visit_shop', ['id' => $shop_id]);
 
         // return response()->json([
         //         'success' => true

@@ -46,15 +46,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::post('/shop/advertisement','ShopController@advertise')->name('advertise');
 
-		
-
-		Route::get('/shop/download-gem-image/{id}','ShopController@getImage')->name('get_image');
-
 		Route::get('/shop/gem-stone/update/{id}','ShopController@viewUpdateGemStone')->name('view_update_gem_stone');
 
 		Route::post('/shop/gem-stone/update/{id}','ShopController@updateGemStone')->name('update_gem_stone');
 
-		Route::get('/shop/gem-stone/delete/{id}','ShopController@deleteGemStone')->name('delete_gem_stone');
+		Route::get('/shop/gem-stone/delete/{shop_id}/{id}','ShopController@deleteGemStone')->name('delete_gem_stone');
 
 		Route::get('/shop/gem-stone/de-activate/{id}','ShopController@deActivateGemStone')->name('de_activate_gem_stone');
 
@@ -84,6 +80,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/update','UserController@updateUser')->name('update');
 
 	Route::get('/visit-shops','ShopController@visitShops')->name('visit_shops');
+
+	Route::get('/visit-shop/{id}','ShopController@visitShop')->name('visit_shop');
+
+	Route::get('/shop/download-gem-image/{id}','ShopController@getImage')->name('get_image');
 
 	Route::get('/search/gems','ShopController@searchGems')->name('search_gems');
 

@@ -25,7 +25,7 @@
     <tbody>
       @foreach(App\User::where('role','shop')->where('active',TRUE)->get() as $user)  
       <tr> 
-        <td><h3><b><a href="#">{{$user->name}}</a></b></h3>
+        <td><h3><b><a href="{{route('visit_shop',['id' => $user->shop->id])}}">{{$user->name}}</a></b></h3>
           @if($user->id == Auth::user()->id)
           <a href="{{route('update')}}">[Edit]</a><br>
           @endif

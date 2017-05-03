@@ -56,7 +56,7 @@
 			      		@else
 			      			<a href="{{route('de_activate_gem_stone',['id' => $gemStone->id])}}" data-original-title="Activate this gem stone" data-toggle="tooltip" type="button" class="btn btn-sm "><i style="font-size:1.5em;" class="glyphicon glyphicon-eye-open"></i></a>
 			      		@endif
-			      		<a href="{{route('delete_gem_stone',['id' => $gemStone->id])}}" data-original-title="Remove this gemstone" data-toggle="tooltip" type="button" class="btn btn-sm "><i style="font-size:1.5em;" class="glyphicon glyphicon-trash"></i></a>
+			      		<a href="{{route('delete_gem_stone',['shop_id'=>$gemStone->shop_id,'id'=>$gemStone->id])}}" data-original-title="Remove this gemstone" data-toggle="tooltip" type="button" class="btn btn-sm "><i style="font-size:1.5em;" class="glyphicon glyphicon-trash"></i></a>
 			      	</span>
 		      	@endif
 		      </div>
