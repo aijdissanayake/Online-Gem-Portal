@@ -20,4 +20,17 @@ class Shop extends Model
     public function gemStones(){
     	return $this->hasMany('App\GemStone');
     }
+
+    public static function create($user_id){
+
+        $shop = new Shop();
+        $shop->user_id = $user_id;
+
+        return $shop;
+
+    }
+
+    public function store(){
+        $this->save();
+    }
 }
