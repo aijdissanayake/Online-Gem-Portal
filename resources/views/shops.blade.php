@@ -30,8 +30,8 @@
           <a href="{{route('update')}}">[Edit]</a><br>
           @endif
           <b>{{$user->address}}</b><br>  
-          <div> Contact Info : T.P. {{$user->tel}}<br>  
-            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;E-mail: {{$user->email}}<br>
+          <div> Contact Info :  {{$user->email}}<br>  
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; {{$user->tel}}<br>
           </div>
         </td> 
       </tr>

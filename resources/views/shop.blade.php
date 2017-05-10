@@ -14,6 +14,12 @@
 	@include('layouts/navbar')
 	<div class="container">
 		<h2><b>{{$shop->user->name}}</b></h2>
+		<b>{{$shop->user->address}}</b><br>  
+		<div> Contact Info :  {{$shop->user->email}}<br>  
+			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; {{$shop->user->tel}}<br>
+		</div>
+		<h3>Available Gems</h3>
+		<hr>
 		<table border="0" id="myTable" class="table" >  
 			<thead border-bottom="0">  
 				<tr>
@@ -29,14 +35,14 @@
 				@if($count % 2)
 				
 				<tr class="row">
-				<td style="display: none;" >{{$gemStone->created_at}}</td> 
-				@endif					
+					<td style="display: none;" >{{$gemStone->created_at}}</td> 
+					@endif					
 					<td class="col-sm-6">
-							<div class="row">
-								<div class="col-sm-3" align="center"> 
-									<img alt="Gem Stone Pic" src="{{route('get_image',['id' => $gemStone->id])}} " class="img-circle img-responsive">
-								</div>
-								<div class="col-sm-9">
+						<div class="row">
+							<div class="col-sm-3" align="center"> 
+								<img alt="Gem Stone Pic" src="{{route('get_image',['id' => $gemStone->id])}} " class="img-circle img-responsive">
+							</div>
+							<div class="col-sm-9">
 								<h3><b><a href="{{route('gem_stone',['id' => $gemStone->id])}}">{{$gemStone->type->type}}</a></b></h3>
 								@if($gemStone->shop->user->id == Auth::user()->id)
 								<a href="{{route('view_update_gem_stone',['id' => $gemStone->id])}}">[Edit]</a><br>
@@ -47,21 +53,21 @@
 									{{$gemStone->description}}<br>
 									{{$gemStone->created_at}}
 								</div>
-								</div>
 							</div>
+						</div>
 					</td>        
-				@if(!($count % 2))
-				
+					@if(!($count % 2))
+
 				</tr>
 				@endif
 				@endforeach
 				@if($count%2)
-					<td></td>
-					</tr>
-				@endif
-			</tbody>  
-		</table>  
-	</div>
+				<td></td>
+			</tr>
+			@endif
+		</tbody>  
+	</table>  
+</div>
 </body>  
 <script>
 	$(document).ready(function(){

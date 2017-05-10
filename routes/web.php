@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function () {
+    dd(count(\App\GemStone::where('gem_size_id', 7)->get()));
+});
+
+
 Auth::routes();
 
 //auth routes

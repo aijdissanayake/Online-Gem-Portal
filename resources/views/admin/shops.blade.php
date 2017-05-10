@@ -14,10 +14,12 @@
 <div class="container">
 <div style="display: inline;">
   <label style=" background-color: #C0C0C0">
+    <span> {{count(App\User::where('role','shop')->get())}}</span>
     <a href="{{route('all_shops')}}">  Shops </a> 
   </label> |
   <label>
     <a href="{{route('all_buyers')}}"> Buyers </a>
+    <span> {{count(App\User::where('role','buyer')->get())}}</span>
   </label>
 </div>
 <div class="row header">
