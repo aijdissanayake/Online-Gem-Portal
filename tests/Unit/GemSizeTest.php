@@ -12,11 +12,7 @@ use App\GemStone;
 
 class GemSizeTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
+
     public function testRemove()
     {
         $this->assertTrue(GemSize::remove(1));

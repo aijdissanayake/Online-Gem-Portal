@@ -42,7 +42,7 @@ class User extends Authenticatable
         return $user;
     }
 
-    public static function deActivate(){
+    public static function deActivate($id){
 
         $user = User::find($id);
 

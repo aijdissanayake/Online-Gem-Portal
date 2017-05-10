@@ -6,6 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+use App\Shop;
 use App\GemType;
 use App\GemSize;
 use App\GemStone;
@@ -25,7 +26,7 @@ class ShopTest extends TestCase
     public function testRelations(){
 
     	$shop = Shop::find(1);
-    	$this->assertInstanceOf(User::class, $shop->shop );
+    	$this->assertInstanceOf(User::class, $shop->user );
     	$this->assertInstanceOf(GemSize::class, $shop->gemSizes[0] );
     	$this->assertInstanceOf(GemType::class, $shop->gemTypes[0] );
     	$this->assertInstanceOf(GemStone::class, $shop->gemStones[0] );
