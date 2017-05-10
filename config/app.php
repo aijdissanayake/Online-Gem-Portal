@@ -176,6 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Kodeplus\Kandylaravel\KandylaravelServiceProvider::class,
 
     ],
 
@@ -225,6 +226,15 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'KandyLaravel'      => Kodeplus\Kandylaravel\Facades\KandyLaravel::class,
+        'KandyVideo'        => Kodeplus\Kandylaravel\Facades\Video::class,
+        'KandyButton'       => Kodeplus\Kandylaravel\Facades\Button::class,
+        'KandyStatus'       => Kodeplus\Kandylaravel\Facades\Status::class,
+        'KandyAddressBook'  => Kodeplus\Kandylaravel\Facades\AddressBook::class,
+        'KandyChat'         => Kodeplus\Kandylaravel\Facades\Chat::class,
+        'KandyLiveChat'     => Kodeplus\Kandylaravel\Facades\LiveChat::class,
+        'KandyCoBrowsing'   => Kodeplus\Kandylaravel\Facades\CoBrowsing::class,
+        'KandySms'          => Kodeplus\Kandylaravel\Facades\Sms::class,
 
     ],
 

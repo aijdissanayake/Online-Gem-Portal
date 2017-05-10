@@ -1,0 +1,188 @@
+#liveChat {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    background-color: #FFFFFF;
+    z-index: 9999;
+    border: 1px #008cba solid;
+}
+
+#liveChat .header {
+    background-color: #008cba;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+#liveChat #messageBox {
+    height: 250px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: none;
+}
+
+#liveChat #registerForm {
+    padding: 20px;
+    display: none;
+}
+
+#liveChat #messageBox > ul {
+    margin: 0 5px;
+}
+
+#liveChat #messageBox ul li {
+    list-style: none;
+}
+
+#liveChat .handle, #liveChat #restoreBtn {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    color: #FFFFFF;
+    float: right;
+}
+
+#liveChat .handle:hover, #liveChat #restoreBtn:hover {
+    cursor: pointer;
+}
+
+#liveChat #restoreBtn {
+    display: none;
+}
+
+#liveChat form {
+    margin-top: 20px;
+}
+
+#liveChat input[type="text"]{
+    height: 40px;
+    padding: 0 32px 0 10px;
+}
+
+#liveChat #messageBox .my-message {
+    color: #0995FF;
+}
+
+#liveChat #messageBox .their-message {
+    color: #ff2f5d;
+}
+
+#liveChat #messageBox .username {
+    font-weight: bold;
+}
+
+#liveChat.hidden .liveChatBody, #liveChat.hidden .handle{
+    display: none;
+}
+
+#liveChat.hidden #restoreBtn {
+    display: inline-block;
+}
+
+#liveChat .formChat {
+    padding: 0 5px;
+    display: none;
+}
+
+#liveChat .formChat form {
+    position: relative;
+}
+
+#liveChat #restoreBtn {
+    border: 2px #FFFFFF solid;
+    margin-top: 3px;
+}
+
+#liveChat .closeChat + span + #restoreBtn {
+    margin-right: 5px;
+}
+
+#liveChat .customerService {
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f6f6f6;
+    height: 80px;
+    display: none;
+}
+
+#liveChat .customerService .helpdeskInfo {
+    padding: 10px;
+}
+
+
+#liveChat .customerService .helpdeskInfo .title {
+    font-size: 13px;
+    line-height: 10px;
+    padding: 5px;
+}
+
+#liveChat .customerService .avatar {
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin-right: 10px;
+}
+
+#liveChat #waiting {
+    background-color: #E4E4E4;
+    width: 300px;
+    height: 300px;
+    padding: 100px 30px;
+    text-align: center;
+    display: none;
+}
+
+#liveChat .helpdeskInfo #agentName {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#liveChat .liveChatBody {
+}
+
+#liveChat #ratingForm {
+    padding: 20px;
+    display: none;
+}
+
+#liveChat #ratingForm .message {
+    display: none;
+}
+
+/*---------------File Sharing------------------*/
+.send-file {
+    position: absolute;
+    right: 4px;
+    top: 7px;
+}
+
+.send-file > input {
+    display: none;
+}
+
+.send-file span.icon-file {
+    background: #c4ccbe url(../img/icon-file-black.png) no-repeat center center;
+    display: none;
+    width: 25px;
+    height: 25px;
+    background-size: 15px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.send-file span.icon-file:hover {
+    background-color: #8b9ba5;
+}
+.imMessage > img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+}
+.imMessage .icon-download {
+    cursor: pointer;
+    color: #007acc;
+    margin-left: 5px;
+    font-size: 13px;
+}
