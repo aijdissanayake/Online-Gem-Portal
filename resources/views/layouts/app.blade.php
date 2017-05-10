@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,7 +32,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <!-- <script src="{{ asset('js/app.js') }}"></script> -->
 </body>
     @yield('scripts')    
 </html>

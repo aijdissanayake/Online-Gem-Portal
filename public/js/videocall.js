@@ -1,4 +1,4 @@
-$(document).ready(function () {
+
 	// // Configure Kandy for calls.
 	// kandy.setup({
  //    	// Designate HTML elements to be our stream containers.
@@ -195,7 +195,8 @@ $(document).ready(function () {
 	        callInitiated: onCallInitiated,
 	        callIncoming: onCallIncoming,
 	        callEstablished: onCallEstablished,
-	        callEnded: onCallEnded
+	        callEnded: onCallEnded,
+	        callInitiateFailed: onCallInitiateFail,
 	    }
 	});
 
@@ -241,6 +242,10 @@ $(document).ready(function () {
 	    // Handle UI changes. A call is in progress.
 	    document.getElementById("make-call").disabled = true;
 	    document.getElementById("end-call").disabled = false;
+	}
+
+	function onCallInitiateFail(){
+		log("Intiation Failed");
 	}
 
 	// What to do for an incoming call.
@@ -354,6 +359,6 @@ $(document).ready(function () {
 	        showVideo = true;
 	    }
 	}
-
+$(document).ready(function () {
 
 });

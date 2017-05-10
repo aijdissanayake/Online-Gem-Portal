@@ -43,4 +43,10 @@ Remote video: <div id="remote-container"></div>
 
 Local video: <div id="local-container"></div>
 
- @endsection
+
+@endsection
+
+@section('scripts')
+
+
+@endsection
