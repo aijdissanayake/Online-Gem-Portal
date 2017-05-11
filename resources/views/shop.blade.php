@@ -114,6 +114,7 @@
 						    <input style="display: none;" type="text" name="username" id="username" value="{{Auth::user()->name}}" />
 						    <input type="submit" name="login_submit" value="Enable Sessions" id="login_submit">
 						</form>
+						<button id="reload" value="reload">Disable Sessions</button>
 						<div id="vid-box"></div>
 						<div id="vid-thumb"></div>
 						<script type="text/javascript">
@@ -122,6 +123,7 @@
 							var vid_thumb  = document.getElementById("vid-thumb");
 							var vid_incall = document.getElementById("inCall");
 							var enabled = false;
+							var reload = document.getElementById("reload");
 
 							function login(form) {
 								if(!enabled){
@@ -133,12 +135,15 @@
 
 									var ctrl = window.ctrl = CONTROLLER(phone);
 
-									ctrl.ready(function(){});
+									ctrl.ready(function(){										
+										$('#login_submit').hide();
+										$('#reload').show();
+									});
+
 									ctrl.receive(function(session){
 
 										$('#inCall').show();
-										$('#login_submit').value("Disable Sessions");
-										$('#login_submit').hide();
+										$('#reload').hide();
 
 										ctrl.addLocalStream(vid_thumb);	
 									    session.connected(function(session) { 
@@ -147,18 +152,28 @@
 									    session.ended(function(session) { video_out.innerHTML=''; });
 									});
 
+									ctrl.videoToggled(function(session, isEnabled){
+										ctrl.getVideoElement(session.number).toggle(isEnabled); // Hide video is stream paused
+									});
+
+									ctrl.audioToggled(function(session, isEnabled){
+										ctrl.getVideoElement(session.number).css("opacity",isEnabled ? 1 : 0.75); // 0.75 opacity is audio muted
+									});
+
 
 									enabled = true;
 									return false; 	// So the form does not submit.
 								}else{
+									enabled = false;
+									$('#reload').hide();
 									$('#login_submit').show();
-									$('#login_submit').value("Enable Sessions");
+									
 								}
 							}
 
 							function end(){
 								ctrl.hangup();
-								$('#login_submit').show();
+								$('#reload').show();
 								$('#inCall').hide();
 								vid_thumb.innerHTML=''; 
 								
@@ -176,6 +191,9 @@
 								else $('#pause').html('Pause');
 							}
 
+							$('#reload').click(function (){
+								window.location.reload(true);
+							});
 
 
 						</script>
@@ -244,6 +262,7 @@
 		});
 		$('#example').DataTable(  );
 		$('#inCall').hide();
+		$('#reload').hide();
 	});
 </script>
 </html>  
