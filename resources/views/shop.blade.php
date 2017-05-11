@@ -33,8 +33,19 @@
 							<input style="display:none;" type="text" name="number" value="{{$shop->user->name}}"/>
 							<input type="submit" name="start_session" value="Start a Session" id="start_session" />
 						</form>
-						<div id="vid-box"></div>
-						<div id="vid-thumb"></div>
+						<div class="row">
+							<!-- Buttons for in call features -->
+							<div class="col-xs-5">
+								<div id="inCall" style="float: right;">
+									<button id="end" onclick="end()">End</button>
+									<button id="mute" onclick="mute()">Mute</button>
+									<button id="pause" onclick="pause()">Pause</button>
+								</div>
+								<hr>							
+								<div id="vid-thumb"></div>
+							</div>
+							<div class="col-xs-7" id="vid-box"></div>
+						</div>
 						<script type="text/javascript">
 							var video_out  = document.getElementById("vid-box");
 							var vid_thumb  = document.getElementById("vid-thumb");
@@ -52,33 +63,32 @@
 
 								var ctrl = window.ctrl = CONTROLLER(phone);
 								var num = form.number.value;
-
+								$('#start_session').hide();
 								ctrl.ready(function(){
 
 									console.log('Ready to Start Session');
 									form.start_session.hidden="true";	// Hide start button
-									
+									$('#start_session').hide();
 									console.log('nubmer is ' + num);
-									ctrl.addLocalStream(vid_thumb);	
+									ctrl.addLocalStream(vid_thumb);
+									$( "#vid-thumb" ).find( "video" ).width(100);
 									phone.dial(num);
 									$('#inCall').show();
-									// setInterval(function(){ctrl.isOnline(num, function(isOn){// Check if other is listening for calls
-									// 	console.log("isOn respond");
-									// 	console.log(isOn);
-									// // 	if (isOn) {ctrl.dial(num);}		// Dial if they are online
-									// // 	else {alert("No User Chack");}	// Alert if not
-									// 	//vid_incall.hidden = "false";
-									// });},1);
-
 								});
 
 								ctrl.receive(function(session){
-									    session.connected(function(session) { video_out.appendChild(session.video); });
-									    session.ended(function(session) { ctrl.getVideoElement(session.number).remove(); });
+									    session.connected(function(session) { 
+									    	video_out.appendChild(session.video);
+									    	ctrl.getVideoElement(session.number).width(400);
+									    });
+									    session.ended(function(session) { 
+									    	//ctrl.getVideoElement(session.number).remove();
+									    	ctrl.getVideoElement(session.number).css("opacity",0); 
+									    });
 								});
 
 								ctrl.videoToggled(function(session, isEnabled){
-									ctrl.getVideoElement(session.number).toggle(isEnabled); // Hide video is stream paused
+									//ctrl.getVideoElement(session.number).toggle(isEnabled); // Hide video is stream paused
 								});
 
 								ctrl.audioToggled(function(session, isEnabled){
@@ -92,6 +102,7 @@
 								ctrl.hangup();
 								$('#start_session').show();
 								$('#inCall').hide();
+								video_out.innerHTML='';
 								vid_thumb.innerHTML=''; 
 								
 							}
@@ -115,8 +126,19 @@
 						    <input type="submit" name="login_submit" value="Enable Sessions" id="login_submit">
 						</form>
 						<button id="reload" value="reload">Disable Sessions</button>
-						<div id="vid-box"></div>
-						<div id="vid-thumb"></div>
+						<div class="row">
+							<!-- Buttons for in call features -->
+							<div class="col-xs-5">
+								<div id="inCall" style="float: right;">
+									<button id="end" onclick="end()">End</button>
+									<button id="mute" onclick="mute()">Mute</button>
+									<button id="pause" onclick="pause()">Pause</button>
+								</div>
+								<hr>							
+								<div id="vid-thumb"></div>
+							</div>
+							<div class="col-xs-7" id="vid-box"></div>
+						</div>
 						<script type="text/javascript">
 
 							var video_out = document.getElementById("vid-box");
@@ -145,15 +167,21 @@
 										$('#inCall').show();
 										$('#reload').hide();
 
-										ctrl.addLocalStream(vid_thumb);	
+										ctrl.addLocalStream(vid_thumb);
+										$( "#vid-thumb" ).find( "video" ).width(100);
+
 									    session.connected(function(session) { 
-									    	video_out.appendChild(session.video); 
+									    	video_out.appendChild(session.video);
+									    	ctrl.getVideoElement(session.number).width(400); 
 									    });
-									    session.ended(function(session) { video_out.innerHTML=''; });
+									    session.ended(function(session) { 
+									    	//video_out.innerHTML='';
+									    	ctrl.getVideoElement(session.number).css("opacity",0); 
+									    });
 									});
 
 									ctrl.videoToggled(function(session, isEnabled){
-										ctrl.getVideoElement(session.number).toggle(isEnabled); // Hide video is stream paused
+										//ctrl.getVideoElement(session.number).toggle(isEnabled); // Hide video is stream paused
 									});
 
 									ctrl.audioToggled(function(session, isEnabled){
@@ -175,6 +203,7 @@
 								ctrl.hangup();
 								$('#reload').show();
 								$('#inCall').hide();
+								video_out.innerHTML='';
 								vid_thumb.innerHTML=''; 
 								
 							}
@@ -198,9 +227,7 @@
 
 						</script>
 					@endif
-					<div id="inCall"> <!-- Buttons for in call features -->
-						<button id="end" onclick="end()">End</button> <button id="mute" onclick="mute()">Mute</button> <button id="pause" onclick="pause()">Pause</button>
-					</div>
+					
 				</div>			
 			</div>
 		</div>
