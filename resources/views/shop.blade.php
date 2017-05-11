@@ -11,6 +11,7 @@
 	<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="https://cdn.pubnub.com/pubnub-3.7.14.min.js"></script>
 	<script src="https://cdn.pubnub.com/webrtc/webrtc.js"></script>
+	<script src="https://cdn.pubnub.com/webrtc/rtc-controller.js"></script>
 </head>
 <body>
 	@include('layouts/navbar')
@@ -26,42 +27,64 @@
 			<div class="col-xs-8">
 				<br><br>
 				<div style="float: right;">
-					<h4>Remote Observaton is Available</h4>
-					<form name="callForm" id="call" action="#" onsubmit="return makeCall(this);">
-						<input style="display:none;" type="text" name="number" value="Shop"/>
-						<input type="submit" value="Start a Session"/>
-					</form>
-					<div id="vid-box"></div>
-					<script type="text/javascript">
-						var video_out = document.getElementById("vid-box");
+					<h4>Remote Observaton</h4>
+					@if(Auth::user()->id != $shop->user->id )						
+						<form name="callForm" id="call" action="#" onsubmit="return makeCall(this);">
+							<input style="display:none;" type="text" name="number" value="{{$shop->user->name}}"/>
+							<input type="submit" value="Start a Session"/>
+						</form>
+						<div id="vid-box"></div>
+						<script type="text/javascript">
+							var video_out = document.getElementById("vid-box");
 
-						function login(form) {
+							function makeCall(form){
 
-						}
+								var phone = window.phone = PHONE({
+								    number        : "Buyer", 
+								    // || "Anonymous", // listen on username line else Anonymous
+								    publish_key   : 'pub-c-b551173f-d10f-45f6-a7f2-385740ff22f5',
+								    subscribe_key : 'sub-c-a740530a-360a-11e7-b860-02ee2ddab7fe',
+								});	
+								phone.ready(function(){ 
+									// form.username.style.background="#55ff5b";
+									console.log('Ready to Start Session');
+									phone.dial(form.number.value); 
+								});
+								phone.receive(function(session){
+									    session.connected(function(session) { video_out.appendChild(session.video); });
+									    session.ended(function(session) { video_out.innerHTML=''; });
+								});
+								console.log(form.number.value);
+								return false;
+							}
+						</script>
+					@else
+						<form name="loginForm" id="login" action="#" onsubmit="return login(this);">
+						    <input style="display: none;" type="text" name="username" id="username" value="{{Auth::user()->name}}" />
+						    <input type="submit" name="login_submit" value="Allow Sessions">
+						</form>
+						<div id="vid-box"></div>
+						<script type="text/javascript">
+							var video_out = document.getElementById("vid-box");
 
-						function makeCall(form){
-
-							var phone = window.phone = PHONE({
-							    number        : "Buyer", 
-							    // || "Anonymous", // listen on username line else Anonymous
-							    publish_key   : 'pub-c-b551173f-d10f-45f6-a7f2-385740ff22f5',
-							    subscribe_key : 'sub-c-a740530a-360a-11e7-b860-02ee2ddab7fe',
-							});	
-							phone.ready(function(){ 
-								// form.username.style.background="#55ff5b";
-								console.log('Ready to Start Session'); 
+							function login(form) {
+								var phone = window.phone = PHONE({
+								    number        : form.username.value, // listen on username line else Anonymous
+								    publish_key   : 'pub-c-b551173f-d10f-45f6-a7f2-385740ff22f5',
+								    subscribe_key : 'sub-c-a740530a-360a-11e7-b860-02ee2ddab7fe',
+								});	
+								phone.ready(function(){ form.username.style.background="#55ff5b"; });
 								phone.receive(function(session){
 								    session.connected(function(session) { video_out.appendChild(session.video); });
 								    session.ended(function(session) { video_out.innerHTML=''; });
-								    if (!window.phone) alert("Login First!");
-									else phone.dial(form.number.value);
 								});
-							});
-
-							console.log(form.number.value);
-							return false;
-						}
-					</script>
+								return false; 	// So the form does not submit.
+							}
+						</script>
+					@endif
+					<div id="inCall"> <!-- Buttons for in call features -->
+						<button id="end" onclick="end()">End</button> <button id="mute" onclick="mute()">Mute</button> <button id="pause" onclick="pause()">Pause</button>
+					</div>
 				</div>			
 			</div>
 		</div>
