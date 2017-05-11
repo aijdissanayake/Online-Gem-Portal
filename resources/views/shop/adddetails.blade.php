@@ -92,7 +92,7 @@
 				<hr>
 				<ul class="list-unstyled" id="sizes" >
 					@foreach(\App\GemSize::where('shop_id',Auth::user()->shop->id)->where('active',TRUE)->where('deleted',FALSE)->get() as $size)		
-					<li class='type-size row col-md-offset-1' typeID = '{{$size->id}}'>
+					<li class='type-size row col-md-offset-1' sizeID = '{{$size->id}}'>
 					<span class="col-md-9 "> {{$size->size}}</span>
 					<span class="col-md-1" style="border-width: 1px">
 					{{count(\App\GemStone::where('gem_size_id', $size->id)->get())}}

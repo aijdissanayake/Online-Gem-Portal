@@ -15,8 +15,11 @@ $(document).ready(function () {
 				        var $type = data['type'];
 				        var $id = data['id'];
 	                	console.log('success' + $type);
-				        $('#types').append("<li class='type-size' typeID= "+ $id +" >" + $type
-				        	+ " <a href='#' class='close' aria-hidden='true'>&times;</a></li>");
+                        $('#types').append(
+                            "<li class='type-size row' typeID = " + $id + "> <span class='col-md-9'>" + $type + 
+                            "</span><span class='col-md-1' style='border-width: 1px'> 0 </span>" + 
+                            "<span><a href='#' class='close' style='color: black;' aria-hidden='true'>&times;</a></span>"
+                            );
     				}
     		});
     	}
@@ -59,8 +62,13 @@ $(document).ready(function () {
 				        var $size = data['size'];
 				        var $id = data['id'];
 	                	console.log('success' + $size);
-				        $('#sizes').append("<li class='type-size' sizeID= "+ $id +" >" + $size
-				        	+ " <a href='#' class='close' aria-hidden='true'>&times;</a></li>");
+				        // $('#sizes').append("<li class='type-size' sizeID= "+ $id +" >" + $size
+				        // 	+ " <a href='#' class='close' aria-hidden='true'>&times;</a></li>");
+                        $('#sizes').append(
+                            "<li class='type-size row col-md-offset-1' sizeID = " + $id + "> <span class='col-md-9'>" + $size + 
+                            "</span><span class='col-md-1' style='border-width: 1px'> 0 </span>" + 
+                            "<span><a href='#' class='close' style='color: black;' aria-hidden='true'>&times;</a></span>"
+                            );
     				}
     		});
     	}
