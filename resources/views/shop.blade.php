@@ -9,14 +9,61 @@
 	<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
 	<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="https://cdn.pubnub.com/pubnub-3.7.14.min.js"></script>
+	<script src="https://cdn.pubnub.com/webrtc/webrtc.js"></script>
 </head>
 <body>
 	@include('layouts/navbar')
 	<div class="container">
-		<h2><b>{{$shop->user->name}}</b></h2>
-		<b>{{$shop->user->address}}</b><br>  
-		<div> Contact Info :  {{$shop->user->email}}<br>  
-			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; {{$shop->user->tel}}<br>
+		<div class="row">
+			<div class="col-xs-4">
+				<h2><b>{{$shop->user->name}}</b></h2>
+				<b>{{$shop->user->address}}</b><br>  
+				<div> Contact Info :  {{$shop->user->email}}<br>  
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; {{$shop->user->tel}}<br>
+				</div>
+			</div>
+			<div class="col-xs-8">
+				<br><br>
+				<div style="float: right;">
+					<h4>Remote Observaton is Available</h4>
+					<form name="callForm" id="call" action="#" onsubmit="return makeCall(this);">
+						<input style="display:none;" type="text" name="number" value="Shop"/>
+						<input type="submit" value="Start a Session"/>
+					</form>
+					<div id="vid-box"></div>
+					<script type="text/javascript">
+						var video_out = document.getElementById("vid-box");
+
+						function login(form) {
+
+						}
+
+						function makeCall(form){
+
+							var phone = window.phone = PHONE({
+							    number        : "Buyer", 
+							    // || "Anonymous", // listen on username line else Anonymous
+							    publish_key   : 'pub-c-b551173f-d10f-45f6-a7f2-385740ff22f5',
+							    subscribe_key : 'sub-c-a740530a-360a-11e7-b860-02ee2ddab7fe',
+							});	
+							phone.ready(function(){ 
+								// form.username.style.background="#55ff5b";
+								console.log('Ready to Start Session'); 
+								phone.receive(function(session){
+								    session.connected(function(session) { video_out.appendChild(session.video); });
+								    session.ended(function(session) { video_out.innerHTML=''; });
+								    if (!window.phone) alert("Login First!");
+									else phone.dial(form.number.value);
+								});
+							});
+
+							console.log(form.number.value);
+							return false;
+						}
+					</script>
+				</div>			
+			</div>
 		</div>
 		<h3>Available Gems</h3>
 		<hr>
