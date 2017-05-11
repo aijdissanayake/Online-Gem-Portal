@@ -17,10 +17,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function () {
+Route::get('/call1', function () {
     return view('video/call');
 });
 
+Route::get('/call2', function () {
+    return view('video/call2');
+});
+
+Route::get('/pubnub', function () {
+    return view('video/pubnub');
+});
 
 Auth::routes();
 

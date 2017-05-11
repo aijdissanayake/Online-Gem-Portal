@@ -181,7 +181,7 @@
 
 	// Variables for logging in.
 	var projectAPIKey = "DAKcae4dcd797924ba080b035dfb86afb4a";
-	var username = "buyer@gemortal.gmail.com";
+	var username = "shop@gemortal.gmail.com";
 	var password = "Gem123@portal";
 
 	// Setup Kandy to make and receive calls.
@@ -235,6 +235,18 @@
 	//  when a call is initiated.
 	function onCallInitiated(call, callee) {
 	    log("Call initiated with " + callee + ". Ringing...");
+	    
+	    kandy.getDevices("DAKcae4dcd797924ba080b035dfb86afb4a", 
+    	function (devices) {
+    	log(devices);
+    	console.log(devices);
+    	console.log("devices");
+    	}, 
+    	function (errorMessage){
+    		log(errorMessage);
+    		console.log('no devicec details');
+
+	    });
 
 	    // Store the call id, so the caller has access to it.
 	    callId = call.getId();
