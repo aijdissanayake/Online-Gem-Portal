@@ -31,55 +31,153 @@
 					@if(Auth::user()->id != $shop->user->id )						
 						<form name="callForm" id="call" action="#" onsubmit="return makeCall(this);">
 							<input style="display:none;" type="text" name="number" value="{{$shop->user->name}}"/>
-							<input type="submit" value="Start a Session"/>
+							<input type="submit" name="start_session" value="Start a Session" id="start_session" />
 						</form>
 						<div id="vid-box"></div>
+						<div id="vid-thumb"></div>
 						<script type="text/javascript">
-							var video_out = document.getElementById("vid-box");
+							var video_out  = document.getElementById("vid-box");
+							var vid_thumb  = document.getElementById("vid-thumb");
+							var vid_incall = document.getElementById("inCall");
+
 
 							function makeCall(form){
 
 								var phone = window.phone = PHONE({
-								    number        : "Buyer", 
+								    number        : "gemBuyer", 
 								    // || "Anonymous", // listen on username line else Anonymous
 								    publish_key   : 'pub-c-b551173f-d10f-45f6-a7f2-385740ff22f5',
 								    subscribe_key : 'sub-c-a740530a-360a-11e7-b860-02ee2ddab7fe',
 								});	
-								phone.ready(function(){ 
-									// form.username.style.background="#55ff5b";
+
+								var ctrl = window.ctrl = CONTROLLER(phone);
+								var num = form.number.value;
+
+								ctrl.ready(function(){
+
 									console.log('Ready to Start Session');
-									phone.dial(form.number.value); 
+									form.start_session.hidden="true";	// Hide start button
+									
+									console.log('nubmer is ' + num);
+									ctrl.addLocalStream(vid_thumb);	
+									phone.dial(num);
+									$('#inCall').show();
+									// setInterval(function(){ctrl.isOnline(num, function(isOn){// Check if other is listening for calls
+									// 	console.log("isOn respond");
+									// 	console.log(isOn);
+									// // 	if (isOn) {ctrl.dial(num);}		// Dial if they are online
+									// // 	else {alert("No User Chack");}	// Alert if not
+									// 	//vid_incall.hidden = "false";
+									// });},1);
+
 								});
-								phone.receive(function(session){
+
+								ctrl.receive(function(session){
 									    session.connected(function(session) { video_out.appendChild(session.video); });
-									    session.ended(function(session) { video_out.innerHTML=''; });
+									    session.ended(function(session) { ctrl.getVideoElement(session.number).remove(); });
 								});
-								console.log(form.number.value);
+
+								ctrl.videoToggled(function(session, isEnabled){
+									ctrl.getVideoElement(session.number).toggle(isEnabled); // Hide video is stream paused
+								});
+
+								ctrl.audioToggled(function(session, isEnabled){
+									ctrl.getVideoElement(session.number).css("opacity",isEnabled ? 1 : 0.75); // 0.75 opacity is audio muted
+								});
+
 								return false;
 							}
+
+							function end(){
+								ctrl.hangup();
+								$('#start_session').show();
+								$('#inCall').hide();
+								vid_thumb.innerHTML=''; 
+								
+							}
+
+							function mute(){
+								var audio = ctrl.toggleAudio();
+								if (!audio) $("#mute").html("Unmute");
+								else $("#mute").html("Mute");
+							}
+
+							function pause(){
+								var video = ctrl.toggleVideo();
+								if (!video) $('#pause').html('Unpause');
+								else $('#pause').html('Pause');
+							}
+
 						</script>
 					@else
 						<form name="loginForm" id="login" action="#" onsubmit="return login(this);">
 						    <input style="display: none;" type="text" name="username" id="username" value="{{Auth::user()->name}}" />
-						    <input type="submit" name="login_submit" value="Allow Sessions">
+						    <input type="submit" name="login_submit" value="Enable Sessions" id="login_submit">
 						</form>
 						<div id="vid-box"></div>
+						<div id="vid-thumb"></div>
 						<script type="text/javascript">
+
 							var video_out = document.getElementById("vid-box");
+							var vid_thumb  = document.getElementById("vid-thumb");
+							var vid_incall = document.getElementById("inCall");
+							var enabled = false;
 
 							function login(form) {
-								var phone = window.phone = PHONE({
-								    number        : form.username.value, // listen on username line else Anonymous
-								    publish_key   : 'pub-c-b551173f-d10f-45f6-a7f2-385740ff22f5',
-								    subscribe_key : 'sub-c-a740530a-360a-11e7-b860-02ee2ddab7fe',
-								});	
-								phone.ready(function(){ form.username.style.background="#55ff5b"; });
-								phone.receive(function(session){
-								    session.connected(function(session) { video_out.appendChild(session.video); });
-								    session.ended(function(session) { video_out.innerHTML=''; });
-								});
-								return false; 	// So the form does not submit.
+								if(!enabled){
+									var phone = window.phone = PHONE({
+									    number        : form.username.value, // listen on username line else Anonymous
+									    publish_key   : 'pub-c-b551173f-d10f-45f6-a7f2-385740ff22f5',
+									    subscribe_key : 'sub-c-a740530a-360a-11e7-b860-02ee2ddab7fe',
+									});
+
+									var ctrl = window.ctrl = CONTROLLER(phone);
+
+									ctrl.ready(function(){});
+									ctrl.receive(function(session){
+
+										$('#inCall').show();
+										$('#login_submit').value("Disable Sessions");
+										$('#login_submit').hide();
+
+										ctrl.addLocalStream(vid_thumb);	
+									    session.connected(function(session) { 
+									    	video_out.appendChild(session.video); 
+									    });
+									    session.ended(function(session) { video_out.innerHTML=''; });
+									});
+
+
+									enabled = true;
+									return false; 	// So the form does not submit.
+								}else{
+									$('#login_submit').show();
+									$('#login_submit').value("Enable Sessions");
+								}
 							}
+
+							function end(){
+								ctrl.hangup();
+								$('#login_submit').show();
+								$('#inCall').hide();
+								vid_thumb.innerHTML=''; 
+								
+							}
+
+							function mute(){
+								var audio = ctrl.toggleAudio();
+								if (!audio) $("#mute").html("Unmute");
+								else $("#mute").html("Mute");
+							}
+
+							function pause(){
+								var video = ctrl.toggleVideo();
+								if (!video) $('#pause').html('Unpause');
+								else $('#pause').html('Pause');
+							}
+
+
+
 						</script>
 					@endif
 					<div id="inCall"> <!-- Buttons for in call features -->
@@ -145,6 +243,7 @@
 			order: [[ 0 , 'desc' ]]
 		});
 		$('#example').DataTable(  );
+		$('#inCall').hide();
 	});
 </script>
 </html>  
