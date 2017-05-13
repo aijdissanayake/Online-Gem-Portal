@@ -153,6 +153,7 @@
 									    number        : form.username.value, // listen on username line else Anonymous
 									    publish_key   : 'pub-c-b551173f-d10f-45f6-a7f2-385740ff22f5',
 									    subscribe_key : 'sub-c-a740530a-360a-11e7-b860-02ee2ddab7fe',
+									    ssl : (('https:' == document.location.protocol) ? true : false)
 									});
 
 									var ctrl = window.ctrl = CONTROLLER(phone);
