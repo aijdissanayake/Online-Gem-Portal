@@ -11,6 +11,7 @@
 </head>
 @include('layouts/navbar')
 <div class="container">
+<h2><b>All Users</b></h2>
 <div style="display: inline;">
   <label >
     <span> {{count(App\User::where('role','shop')->get())}}</span>

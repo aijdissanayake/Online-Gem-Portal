@@ -57,7 +57,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li> <a href="{{route('all_shops')}}"> User Settings </a> </li>
-                                    <li> <a href="#"> Advertisement Settings</a></li>
+                                    <li> <a href="{{route('all_gems')}}"> Advertisement Settings</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li> <a href="#"> Dash-Board</a></li>
                                 </ul>
@@ -72,6 +72,9 @@
                                 <ul class="dropdown-menu" role="menu">
 
                                     <li> <a href="{{route('profile_view')}}"> View Profile </a> </li>
+                                    @if(Auth::user()->role != 'buyer')
+                                    <li><a href="{{route('visit_shop',['id' => Auth::user()->shop->id])}}">View Shopfront </a></li>
+                                    @endif
                                     <li> <a href="{{route('update_view')}}"> Update Profile </a></li>
                                     <li role="separator" class="divider"></li>
                                     <li>

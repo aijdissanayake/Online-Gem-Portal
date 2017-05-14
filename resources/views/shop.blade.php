@@ -164,7 +164,7 @@
 									});
 
 									ctrl.receive(function(session){
-
+										confirm("Accept Incoming Call?");
 										$('#inCall').show();
 										$('#reload').hide();
 

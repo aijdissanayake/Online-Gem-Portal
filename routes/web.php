@@ -40,6 +40,11 @@ Route::group(['middleware' => 'auth'], function () {
 	    	return view('admin/shops');
 		})->name('all_shops');
 
+		Route::get('/admin/all-gems',function () {
+	    	return view('admin/gems');
+		})->name('all_gems');
+
+
 	});
 
 	//shop routes
