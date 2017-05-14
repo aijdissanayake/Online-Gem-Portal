@@ -33,6 +33,8 @@
             <th>Name</th>  
             <th>Telephone</th>  
             <th>E-mail</th>
+            <th>All Ads</th>
+            <th>Active Ads</th>
             <th>In/Activate</th>   
           </tr>  
         </thead>  
@@ -43,6 +45,8 @@
             <td>{{$user->name}}</td>  
             <td>{{$user->tel}}</td>  
             <td>{{$user->email}}</td>
+            <td>{{count($user->shop->gemStones)}}</td>
+            <td>{{count($user->shop->gemStones->where('active',true))}}</td>
             <td>{{$user->active==1?"Active":"Inactive"}}<a href="{{route('de_activate', ['id' => $user->id])}}">[change]</a></td> 
           </tr>
         @endforeach
