@@ -36,11 +36,9 @@
     </style>
 
     </head>
+    @include('layouts/navbar')
     <body>
-        <div id="app">
-            @include('layouts/navbar')
-        </div>
-
+            
     <div class="container">
         @include('includes.message-block')
         <br>
@@ -138,5 +136,6 @@
         <br>
         <br>
     </div>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

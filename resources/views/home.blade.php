@@ -39,7 +39,7 @@
                         </div>
                         @if(Auth::user()->role == 'admin')
                             <div class="interaction">
-                                <a target="_blank" href="{{ route('view_update_post', ['id' => $post['id']]) }}" id="edit">Edit</a> |
+                                <a href="{{ route('view_update_post', ['id' => $post['id']]) }}" id="edit">Edit</a> |
                                 <a href="{{ route('de_activate_post', ['id' => $post['id']]) }}">{{$post->deleted? 'Activate' : 'Deactivate'}}</a>
                             </div>
                         @endif
