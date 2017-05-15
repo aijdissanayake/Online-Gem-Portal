@@ -1,49 +1,52 @@
 <!DOCTYPE html>   
-<html lang="en">   
+<html lang="en">
+
 @include('layouts/datatableheader')
 @include('layouts/navbar')
-<div class="container">
-<h2><b>All Users</b></h2>
-<div style="display: inline;">
-  <label >
-    <span> {{count(App\User::where('role','shop')->get())}}</span>
-    <a href="{{route('all_shops')}}">  Shops </a> 
-  </label> |
-  <label style=" background-color: #C0C0C0">
-    <a href="{{route('all_buyers')}}"> Buyers </a>
-    <span> {{count(App\User::where('role','buyer')->get())}}</span>
-  </label>
-</div>
-<div class="row header">
-<h3 id="user_type"></h3>
-</div>
-<table id="myTable" class="table table-striped" >  
-        <thead>  
-          <tr>  
-            <th>ID</th>  
-            <th>Name</th>  
-            <th>Telephone</th>  
-            <th>E-mail</th>
-            <th>In/Activate</th>   
-          </tr>  
-        </thead>  
-        <tbody>
+
+<body>
+  <div class="container">
+    <h2><b>All Users</b></h2>
+    <div style="display: inline;">
+      <label >
+        <span> {{count(App\User::where('role','shop')->get())}}</span>
+        <a href="{{route('all_shops')}}">  Shops </a> 
+      </label> |
+      <label style=" background-color: #C0C0C0">
+        <a href="{{route('all_buyers')}}"> Buyers </a>
+        <span> {{count(App\User::where('role','buyer')->get())}}</span>
+      </label>
+    </div>
+    <div class="row header">
+      <h3 id="user_type"></h3>
+    </div>
+    <table id="myTable" class="table table-striped" >  
+      <thead>  
+        <tr>  
+          <th>ID</th>  
+          <th>Name</th>  
+          <th>Telephone</th>  
+          <th>E-mail</th>
+          <th>In/Activate</th>   
+        </tr>  
+      </thead>  
+      <tbody>
         @foreach(App\User::where('role','buyer')->get() as $user)  
-          <tr>  
-            <td>{{$user->id}}</td>  
-            <td>{{$user->name}}</td>  
-            <td>{{$user->tel}}</td>  
-            <td>{{$user->email}}</td>
-            <td>{{$user->active==1?"Active":"Inactive"}}<a href="{{route('de_activate', ['id' => $user->id])}}">[change]</a></td> 
-          </tr>
+        <tr>  
+          <td>{{$user->id}}</td>  
+          <td>{{$user->name}}</td>  
+          <td>{{$user->tel}}</td>  
+          <td>{{$user->email}}</td>
+          <td>{{$user->active==1?"Active":"Inactive"}}<a href="{{route('de_activate', ['id' => $user->id])}}">[change]</a></td> 
+        </tr>
         @endforeach
-        </tbody>  
-      </table>  
-	  </div>
+      </tbody>  
+    </table>  
+  </div>
 </body>  
 <script>
-$(document).ready(function(){
+  $(document).ready(function(){
     $('#myTable').dataTable();
-});
+  });
 </script>
 </html>  

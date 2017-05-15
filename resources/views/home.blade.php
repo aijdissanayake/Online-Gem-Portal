@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('includes.message-block'){{--Display General Feed page title--}}
+@include('includes.message-block')
 <div class="container">
 
     <div class="row">
@@ -39,7 +39,6 @@
                         </div>
                         @if(Auth::user()->role == 'admin')
                             <div class="interaction">
-                                {{--<a href="#" id="edit">Edit</a> |--}}
                                 <a target="_blank" href="{{ route('view_update_post', ['id' => $post['id']]) }}" id="edit">Edit</a> |
                                 <a href="{{ route('de_activate_post', ['id' => $post['id']]) }}">{{$post->deleted? 'Activate' : 'Deactivate'}}</a>
                             </div>

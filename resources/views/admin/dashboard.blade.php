@@ -22,7 +22,18 @@
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
             ]) !!};
-        </script>
+    </script>
+
+    <style type="text/css">
+        body {
+          padding-top: 60px;
+        }
+        @media (max-width: 979px) {
+          body {
+            padding-top: 0px;
+          }
+        }
+    </style>
 
     </head>
     <body>
@@ -91,7 +102,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" style="border-style: ridge; padding: 2%">
                     <div class="col-xs-12" >
                        @include('includes.message-block')
                         <html>
@@ -112,6 +123,14 @@
                                         </div>
                                     </div>
                                     <br>
+
+                                    <div class="row">
+                                        <label>For :</label> &nbsp;&nbsp;
+                                        <input type="checkbox" name="shop">Shops &nbsp;&nbsp;
+                                        <input type="checkbox" name="buyer">Buyers 
+                                    </div>
+                                    <br>
+
                                     {{-- Input text body --}}
                                     <div class="row">
                                         <div>
@@ -121,11 +140,6 @@
                                                 {{ old('body')}}
                                             </textarea>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <label>For * :</label> <br>
-                                        <input type="checkbox" name="shop">Shops<br>
-                                        <input type="checkbox" name="buyer">Buyers 
                                     </div>
 
                                     {{-- Calling CKEditor --}}

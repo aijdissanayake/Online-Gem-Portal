@@ -22,7 +22,18 @@
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
             ]) !!};
-        </script>
+    </script>
+
+    <style type="text/css">
+        body {
+          padding-top: 60px;
+        }
+        @media (max-width: 979px) {
+          body {
+            padding-top: 0px;
+          }
+        }
+    </style>
 
     </head>
     <body>
@@ -30,73 +41,102 @@
             @include('layouts/navbar')
         </div>
 
-        <div class="container">
-            @include('includes.message-block')
-            <br>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="col-xs-6">
-                        <h3>Update Post</h3>
-                    </div>
-                </div>
-            </div>
+    <div class="container">
+        @include('includes.message-block')
+        <br>
+        <div class="row">
+            <h3><b>Update Post</b></h3>
+        </div>
+        <br>
+        <div class="row">
+            <h4> Post Details: </h4>
+        </div>
 
-            <div class="row">
-                <div class="col s12">
-                    <html>
-                        <head>
-                            <!-- Path to CKEditor -->
-                            <script src='{{asset('ckeditor/ckeditor.js')}}'></script>
-                        </head>
+        <table id="myTable" class="table" >  
+            <thead>  
+                <tr>  
+                  <th>ID</th>  
+                  <th>Title</th>
+                  <th>Created</th>  
+                  <th>Buyers</th>  
+                  <th>Shops</th>
+                  <th>In/Activate</th>   
+                </tr>  
+            </thead>  
+            <tbody> 
+                <tr>  
+                    <td>{{$post->id}}</td>
+                    <td>{{$post->title}}</td>  
+                    <td>{{$post->created_at}}</td>
+                    <td>{{$post->buyer?"Yes":"No"}}</td>
+                    <td>{{$post->shop?"Yes":"No"}}</td>
+                    <td>{{$post->deleted?"Inactive":"Active"}}<a href="{{route('de_activate_post', ['id' => $post->id])}}">[change]</a></td> 
+                </tr>
+            </tbody>
+        </table> 
 
-                        <body>
-                            <form action="{{ route('update_post') }}" method="post">                            
-                                {{-- Input Post title--}}
-                                    <div class="row">
-                                        <div>
-                                            <div class="input-field">
-                                                <label for="title">Title * :</label> <br>
-                                                <input id="title" name="title" type="text" value="{{$post->title}}" class="validate" style="width: 100%">
-                                            </div>
-                                        </div>
+        <div class="row">
+            <h4> Edit : </h4>
+        </div>
+
+        <div class="row" style="border-style: ridge; padding: 2%">
+            <div class="col s12">
+                <html>
+                    <head>
+                        <!-- Path to CKEditor -->
+                        <script src='{{asset('ckeditor/ckeditor.js')}}'></script>
+                    </head>
+
+                    <body>
+                        <form action="{{ route('update_post') }}" method="post">                            
+                            {{-- Input Post title--}}
+                            <div class="row">
+                                <div>
+                                    <div class="input-field">
+                                        <label for="title">Title * :</label> <br>
+                                        <input id="title" name="title" type="text" value="{{$post->title}}" class="validate" style="width: 100%">
                                     </div>
+                                </div>
+                            </div>
+                            <br>
+                            {{-- Input text body --}}
+                            <div class="row">
+                                <div>
+                                    <label for="body">Content * :</label> <br>
+                                    <textarea name="body" id="body" rows="10" cols="80">
+                                        {{--Textarea to be replaced with CKEditor.--}}
+                                        <?php
+                                        $str = "$post->body";
+                                        echo htmlspecialchars_decode($str);
+                                        ?>
+                                    </textarea>
+                                </div>
+                            </div>
+
+                            {{-- Calling CKEditor --}}
+                            <script>
+                                // Replace the <textarea id="body"> with a CKEditor instance, using default configuration.
+                                CKEDITOR.replace( 'body' );
+                            </script>
+
+                            {{--Initialize the id of the post to be sent--}}
+                            <input type="hidden" name="id" value="{{$post->id}}">
+
+                            {{--Button to save the post--}}
+                            <div class="row">
+                                <div class="col-xs-12 center">
                                     <br>
-                                    {{-- Input text body --}}
-                                    <div class="row">
-                                        <div>
-                                            <label for="body">Content * :</label> <br>
-                                            <textarea name="body" id="body" rows="10" cols="80">
-                                                {{--Textarea to be replaced with CKEditor.--}}
-                                                <?php
-                                                $str = "$post->body";
-                                                echo htmlspecialchars_decode($str);
-                                                ?>
-                                            </textarea>
-                                        </div>
-                                    </div>
-
-                                    {{-- Calling CKEditor --}}
-                                    <script>
-                                        // Replace the <textarea id="body"> with a CKEditor instance, using default configuration.
-                                        CKEDITOR.replace( 'body' );
-                                    </script>
-
-                                    {{--Initialize the id of the post to be sent--}}
-                                    <input type="hidden" name="id" value="{{$post->id}}">
-
-                                    {{--Button to save the post--}}
-                                    <div class="row">
-                                        <div class="col-xs-12 center">
-                                            <br>
-                                            <button class="btn btn-primary" style="float: right;" type="submit" id="publish_post">Publish Post</button>
-                                            <input type="hidden" value="{{ Session::token() }}" name="_token"><br><br><br>
-                                        </div>
-                                    </div>
-                            </form>
-                        </body>
-                    </html>
-                </div>
+                                    <button class="btn btn-primary" style="float: right;" type="submit" id="publish_post">Update Post</button>
+                                    <input type="hidden" value="{{ Session::token() }}" name="_token"><br><br><br>
+                                </div>
+                            </div>
+                        </form>
+                    </body>
+                </html>
             </div>
         </div>
-    </body>
+        <br>
+        <br>
+    </div>
+</body>
 </html>
