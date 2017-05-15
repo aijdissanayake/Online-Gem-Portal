@@ -24,7 +24,7 @@ Route::get('/test', function () {
 	str_replace(' ', '-',"https://place-hold.it/800x300/aaa/white&text=0" . $shop->user->tel . "&fontsize=30"),
 	str_replace(' ', '-',"https://place-hold.it/800x300/aaa/white&text=" . $shop->user->email . "&fontsize=30")
 	] ;
-    return view('new')->with('shop', $shop)
+    return view('new3')->with('shop', $shop)
     				  ->with('urls', $urls);
 });
 
