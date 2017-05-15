@@ -18,7 +18,14 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    return view('new');
+	$shop = App\Shop::find(1);
+	$urls = [
+	str_replace(' ', '-',"https://place-hold.it/800x300/aaa/white&text=" . $shop->user->name . "&fontsize=30"),
+	str_replace(' ', '-',"https://place-hold.it/800x300/aaa/white&text=0" . $shop->user->tel . "&fontsize=30"),
+	str_replace(' ', '-',"https://place-hold.it/800x300/aaa/white&text=" . $shop->user->email . "&fontsize=30")
+	] ;
+    return view('new')->with('shop', $shop)
+    				  ->with('urls', $urls);
 });
 
 
