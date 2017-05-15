@@ -121,12 +121,12 @@ footer {
 
                 <div class="row">
 
-                    @foreach(App\GemStone::where('active',TRUE)->where('shop_id',$shop->id)->orderBy('created_at', 'desc')->take(5)->get() as $gemStone)
+                    @foreach(App\GemStone::where('active',TRUE)->where('shop_id',$shop->id)->orderBy('created_at', 'desc')->take(7)->get() as $gemStone)
 
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
+                    <div class="col-sm-3 col-lg-3 col-md-3">
+                        <div class="thumbnail" style="height: 400px;">
                             <div style="padding: 1%" align="center"> 
-                                <img alt="Gem Stone Pic" src="{{route('get_image',['id' => $gemStone->id])}} " class="img-rounded img-responsive">
+                                <img style="height: 200px;" alt="Gem Stone Pic" src="{{route('get_image',['id' => $gemStone->id])}} " class="img-rounded img-responsive">
                             </div>
                             <div class="caption">
                                 <h4 class="pull-right">Rs. {{$gemStone->price}}.00</h4>
@@ -138,12 +138,14 @@ footer {
                         </div>
                     </div>
                     @endforeach
+                </div>
+                <div class="row">
 
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <h4><a href="#">Want to Observe the Gems?</a>
                         </h4>
                         <p>If you want to check the gemstones live, Go to the <a target="_blank" href="#">Inspect Live</a> section and start a session. You will get the chance when ever channel is free.</p>
-                        <a class="btn btn-primary" target="_blank" href="#">Inspect Live</a>
+                        <a class="btn btn-primary" target="_blank" href="{{route('shop_live',['id' => $shop->id])}}">Inspect Live</a><br><br><br>
                     </div>
 
                 </div>
