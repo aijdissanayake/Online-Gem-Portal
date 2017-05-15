@@ -30,8 +30,6 @@ Route::group(['middleware' => 'auth'], function () {
 	//admin routes
 	Route::group(['middleware' => 'admin'], function () {
 
-		Route::get('/admin/de-activate/{id}','UserController@deActivate')->name('de_activate');
-
 		Route::get('/admin/all-buyers',function () {
 	    	return view('admin/buyers');
 		})->name('all_buyers');
@@ -47,6 +45,12 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/admin/dash-board',function () {
 	    	return view('admin/dashboard');
 		})->name('admin_dash_board');
+
+		Route::get('/admin/all-posts',function () {
+	    	return view('admin/posts');
+		})->name('all_posts');
+
+		Route::get('/admin/de-activate/{id}','UserController@deActivate')->name('de_activate');
 
 		Route::post('/admin/create-post','AdminController@createPost')->name('create_post');
 

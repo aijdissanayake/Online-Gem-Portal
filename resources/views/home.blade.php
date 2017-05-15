@@ -11,20 +11,19 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         {{--Display General Posts--}}
         <div class="col s8">
             <div class="col s12">
                 @if(Auth::user()->role == 'buyer')
-                    <?php $posts = App\Post::where('buyer', true)->get() ?>
+                    <?php $posts = App\Post::where('buyer', true)->where('deleted', false)->orderBy('id', 'DESC')->get() ?>
                 @elseif(Auth::user()->role == 'shop')
-                    <?php $posts = App\Post::where('shop', true)->get() ?>
+                    <?php $posts = App\Post::where('shop', true)->where('deleted', false)->orderBy('id', 'DESC')->get() ?>
                 @else
-                    <?php $posts = App\Post::all() ?>
+                    <?php $posts = App\Post::orderBy('id', 'DESC')->get() ?>
                 @endif
                 @foreach($posts as $post)
-                    <article class="card-panel">
+                    <article class="card">
                         <div>
                             <h2>
                                 {{ $post['title'] }}
@@ -41,7 +40,7 @@
                         @if(Auth::user()->role == 'admin')
                             <div class="interaction">
                                 {{--<a href="#" id="edit">Edit</a> |--}}
-                                <a target="_blank" href="{{ route('update_post', ['id' => $post['id']]) }}" id="edit">Edit</a> |
+                                <a target="_blank" href="{{ route('view_update_post', ['id' => $post['id']]) }}" id="edit">Edit</a> |
                                 <a href="{{ route('de_activate_post', ['id' => $post['id']]) }}">{{$post->deleted? 'Activate' : 'Deactivate'}}</a>
                             </div>
                         @endif

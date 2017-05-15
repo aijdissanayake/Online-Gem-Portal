@@ -122,6 +122,11 @@
                                             </textarea>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <label>For * :</label> <br>
+                                        <input type="checkbox" name="shop">Shops<br>
+                                        <input type="checkbox" name="buyer">Buyers 
+                                    </div>
 
                                     {{-- Calling CKEditor --}}
                                     <script>

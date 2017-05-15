@@ -32,10 +32,11 @@
 
         <div class="container">
             @include('includes.message-block')
+            <br>
             <div class="row">
-                <div class="col s12">
-                    <div class="col s6">
-                        <h5>Edit Post</h5>
+                <div class="col-xs-12">
+                    <div class="col-xs-6">
+                        <h3>Update Post</h3>
                     </div>
                 </div>
             </div>
@@ -49,48 +50,48 @@
                         </head>
 
                         <body>
-                            <form action="{{ route('update_post') }}" method="post">
-
-                                {{--Edit the title of the post--}}
-                                <div class="row">
-                                    <div class="col s10 offset-s1">
-                                        <div class="input-field">
-                                            <i class="material-icons blue-text prefix">library_add</i>
-                                            <input id="title" name="title" type="text" value="{{$post->title}}" class="validate">
-                                            <label class="active" for="title">Post Title</label>
+                            <form action="{{ route('update_post') }}" method="post">                            
+                                {{-- Input Post title--}}
+                                    <div class="row">
+                                        <div>
+                                            <div class="input-field">
+                                                <label for="title">Title * :</label> <br>
+                                                <input id="title" name="title" type="text" value="{{$post->title}}" class="validate" style="width: 100%">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                {{--Web-based word processor--}}
-                                <div class="row">
-                                    <div class="col s10 offset-s1">
-                                        <textarea id="mytextarea" name="body">
-                                            <?php
-                                            $str = "$post->body";
-                                            echo htmlspecialchars_decode($str);
-                                            ?>
-                                        </textarea>
+                                    <br>
+                                    {{-- Input text body --}}
+                                    <div class="row">
+                                        <div>
+                                            <label for="body">Content * :</label> <br>
+                                            <textarea name="body" id="body" rows="10" cols="80">
+                                                {{--Textarea to be replaced with CKEditor.--}}
+                                                <?php
+                                                $str = "$post->body";
+                                                echo htmlspecialchars_decode($str);
+                                                ?>
+                                            </textarea>
+                                        </div>
                                     </div>
-                                </div>
 
-                                {{-- Calling CKEditor --}}
-                                <script>
-                                // Replace the <textarea id="body"> with a CKEditor instance, using default configuration.
-                                CKEDITOR.replace( 'body' );
-                                </script>
-                                
-                                {{--Initialize the id of the post to be sent--}}
-                                <input type="hidden" name="id" value="{{$post->id}}">
+                                    {{-- Calling CKEditor --}}
+                                    <script>
+                                        // Replace the <textarea id="body"> with a CKEditor instance, using default configuration.
+                                        CKEDITOR.replace( 'body' );
+                                    </script>
 
-                                {{--Button to save the post--}}
-                                <div class="row">
-                                    <div class="col s10 offset-s1 center">
-                                        <button type="submit" id="publish_post" class="waves-effect waves-light btn-large">Save Post<i class="material-icons right">done</i></button>
-                                        <input type="hidden" value="{{ Session::token() }}" name="_token">
+                                    {{--Initialize the id of the post to be sent--}}
+                                    <input type="hidden" name="id" value="{{$post->id}}">
+
+                                    {{--Button to save the post--}}
+                                    <div class="row">
+                                        <div class="col-xs-12 center">
+                                            <br>
+                                            <button class="btn btn-primary" style="float: right;" type="submit" id="publish_post">Publish Post</button>
+                                            <input type="hidden" value="{{ Session::token() }}" name="_token"><br><br><br>
+                                        </div>
                                     </div>
-                                </div>
-
                             </form>
                         </body>
                     </html>

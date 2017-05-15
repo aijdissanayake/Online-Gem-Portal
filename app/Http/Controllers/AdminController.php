@@ -18,13 +18,15 @@ class AdminController extends Controller
         $post = new Post();
         $post->title = $request['title'];
         $post->body = $request['body'];
+        $post->buyer = $request['shop'] ? true : false;
+        $post->buyer = $request['buyer'] ? true : false;
 
         $message = 'There was an error';
 
         	$post->save();
         	$message = 'Post Successfully Published!';
         
-        return back()->with(['message' => $message]);
+        return redirect(route('home'))->with(['message' => $message]);
     }
 
     public function viewUpdatePost($id)
@@ -50,7 +52,7 @@ class AdminController extends Controller
         {
             $message = 'Post Successfully Updated!';
         }
-        return back()->with(['message' => $message]);
+        return redirect(route('home'))->with(['message' => $message]);
     }
 
     public function deActivatePost($id)
