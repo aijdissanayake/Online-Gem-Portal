@@ -59,7 +59,7 @@
                                     <li> <a href="{{route('all_shops')}}"> User Settings </a> </li>
                                     <li> <a href="{{route('all_gems')}}"> Advertisement Settings</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li> <a href="#"> Dash-Board</a></li>
+                                    <li> <a href="{{route('admin_dash_board')}}"> Dash-Board</a></li>
                                 </ul>
 
                             @endif

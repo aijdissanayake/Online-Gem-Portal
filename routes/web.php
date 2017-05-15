@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    dd(count(\App\GemStone::where('gem_size_id', 7)->get()));
+    return view('dashboard');
 });
 
 
@@ -43,6 +43,12 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/admin/all-gems',function () {
 	    	return view('admin/gems');
 		})->name('all_gems');
+
+		Route::get('/admin/dash-board',function () {
+	    	return view('admin/dashboard');
+		})->name('admin_dash_board');
+
+		Route::post('/admin/create-post','AdminController@createPost')->name('create_post');
 
 
 	});
