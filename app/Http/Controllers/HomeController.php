@@ -23,17 +23,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        if(Auth::user()->role == 'shop'){
-        return view('/shop/home');
-        }
-
-        if(Auth::user()->role == 'buyer'){
-        return view('/buyer/home');
-        }
-
-        if(Auth::user()->role == 'admin'){
-        return view('/admin/home');
-        }
+    {
+        return view('home');
     }
 }

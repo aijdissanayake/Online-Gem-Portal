@@ -3,17 +3,7 @@
 @section('content')
 @include('includes.message-block'){{--Display General Feed page title--}}
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
 
-                <div class="panel-body">
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="row">
         <div class="col s12">
             <div class="col s6">
@@ -26,7 +16,14 @@
         {{--Display General Posts--}}
         <div class="col s8">
             <div class="col s12">
-                @foreach(App\Post::all() as $post)
+                @if(Auth::user()->role == 'buyer')
+                    <?php $posts = App\Post::where('buyer', true)->get() ?>
+                @elseif(Auth::user()->role == 'shop')
+                    <?php $posts = App\Post::where('shop', true)->get() ?>
+                @else
+                    <?php $posts = App\Post::all() ?>
+                @endif
+                @foreach($posts as $post)
                     <article class="card-panel">
                         <div>
                             <h2>
@@ -41,11 +38,13 @@
                         <div class="info">
                             Posted on {{ $post['created_at'] }}
                         </div>
-                        <div class="interaction">
-                            {{--<a href="#" id="edit">Edit</a> |--}}
-                            <a target="_blank" href="{{ route('update_post', ['id' => $post['id']]) }}" id="edit">Edit</a> |
-                            <a href="{{ route('de_activate_post', ['id' => $post['id']]) }}">{{$post->deleted? 'Activate' : 'Deactivate'}}</a>
-                        </div>
+                        @if(Auth::user()->role == 'admin')
+                            <div class="interaction">
+                                {{--<a href="#" id="edit">Edit</a> |--}}
+                                <a target="_blank" href="{{ route('update_post', ['id' => $post['id']]) }}" id="edit">Edit</a> |
+                                <a href="{{ route('de_activate_post', ['id' => $post['id']]) }}">{{$post->deleted? 'Activate' : 'Deactivate'}}</a>
+                            </div>
+                        @endif
                     </article>
                     <br>
                     <br>
