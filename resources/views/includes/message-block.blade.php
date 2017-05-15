@@ -9,7 +9,7 @@
 @endif
 
 @if(Session::has('message'))
-  <div class="" style="background-color: green;">
+  <div class="alert alert-success">
       <ul>
           <li>{{Session::get('message')}}</li>
       </ul>

@@ -33,39 +33,56 @@
         <div class="container">
             <div class="row">
                 <div class="row">
-                    <div class="card col-xs-3" style="border: 5px;">
-                        <h3 class="card-header primary-color white-text">All Users</h3>
-                        <div class="card-block">
-                            <h4 class="card-title">{{count(App\User::all())}}</h4>
-                            <p class="card-text"> Users </p>
-                            <a class="btn btn-primary">User Settings</a>
-                        </div>
-                    </div>
-                    <div class="card col-xs-3">
-                        <h3 class="card-header primary-color white-text">All Shops</h3>
-                        <div class="card-block">
-                            <h4 class="card-title">{{count(App\Shop::all())}}</h4>
-                            <p class="card-text"> Shops </p>
-                            <a class="btn btn-primary">Shop Settings</a>
-                        </div>
-                    </div>
-                    <div class="card col-xs-3">
-                        <h3 class="card-header primary-color white-text">All Buyers</h3>
-                        <div class="card-block">
-                            <h4 class="card-title">{{count(App\User::where('role','buyer')->get())}}</h4>
-                            <p class="card-text"> Buyers </p>
-                            <a class="btn btn-primary">Buyer Settings</a>
-                        </div>
-                    </div>
-                    <div class="card col-xs-3">
-                        <h3 class="card-header primary-color white-text">Advertisements</h3>
-                        <div class="card-block">
-                            <h4 class="card-title">{{count(App\User::where('role','buyer')->get())}}</h4>
-                            <p class="card-text"> Active Advertisements </p>
-                            <a class="btn btn-primary">Ads Settings</a>
+                    <div class="col-xs-12">
+                        <div class="col-xs-6">
+                            <h3>Summary</h3>
                         </div>
                     </div>
                 </div>
+                <div class="row" style="border-style: ridge; padding: 2%">
+                    <div class="card col-xs-2">
+                        <div class="card">
+                            <h3 class="card-header primary-color white-text">All Users</h3>
+                            <div class="card-block">
+                                <h4 class="card-title">{{count(App\User::all())}}</h4>
+                                <p class="card-text"> Active : {{count(App\User::where('active',true)->get())}} </p>
+                                <p class="card-text"> Inactive : {{count(App\User::where('active',false)->get())}} </p>
+                                <a href="{{route('all_shops')}}" class="btn btn-primary">User Settings</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-1"></div>
+                    <div class="card col-xs-2">
+                        <h3 class="card-header primary-color white-text">All Shops</h3>
+                        <div class="card-block">
+                            <h4 class="card-title">{{count(App\Shop::all())}}</h4>
+                            <p class="card-text"> Active : {{count(App\User::where('role','shop')->where('active',true)->get())}} </p>
+                            <p class="card-text"> Inactive : {{count(App\User::where('role','shop')->where('active',false)->get())}} </p>
+                            <a href="{{route('all_shops')}}"  class="btn btn-primary">Shop Settings</a>
+                        </div>
+                    </div>
+                    <div class="col-xs-1"></div>
+                    <div class="card col-xs-2 offset-xs-1">
+                        <h3 class="card-header primary-color white-text">All Buyers</h3>
+                        <div class="card-block">
+                            <h4 class="card-title">{{count(App\User::where('role','buyer')->get())}}</h4>
+                            <p class="card-text"> Active : {{count(App\User::where('role','buyer')->where('active',true)->get())}} </p>
+                            <p class="card-text"> Inactive : {{count(App\User::where('role','buyer')->where('active',false)->get())}} </p>
+                            <a href="{{route('all_buyers')}}"  class="btn btn-primary">Buyer Settings</a>
+                        </div>
+                    </div>
+                    <div class="col-xs-1"></div>
+                    <div class="card col-xs-2 offset-xs-1">
+                        <h3 class="card-header primary-color white-text">All Ads</h3>
+                        <div class="card-block">
+                            <h4 class="card-title">{{count(App\GemStone::all())}}</h4>
+                            <p class="card-text"> Active : {{count(App\GemStone::where('active',true)->get())}} </p>
+                            <p class="card-text"> Inactive : {{count(App\GemStone::where('active',false)->get())}} </p>
+                            <a href="{{route('all_gems')}}" class="btn btn-primary">Ads Settings</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="col-xs-6">
@@ -89,15 +106,16 @@
                                     <div class="row">
                                         <div>
                                             <div class="input-field">
-                                                <input id="title" name="title" type="text" class="validate" value="{{ old('title')}}">
-                                                <label for="title">Post Title</label>
+                                                <label for="title">Title * :</label> <br>
+                                                <input id="title" name="title" type="text" class="validate" value="{{ old('title')}}" style="width: 100%">
                                             </div>
                                         </div>
                                     </div>
-
+                                    <br>
                                     {{-- Input text body --}}
                                     <div class="row">
                                         <div>
+                                            <label for="body">Content * :</label> <br>
                                             <textarea name="body" id="body" rows="10" cols="80">
                                                 {{--Textarea to be replaced with CKEditor.--}}
                                                 {{ old('body')}}
@@ -113,9 +131,10 @@
 
                                     {{--Button to save the post--}}
                                     <div class="row">
-                                        <div class="col-xs-10 center">
-                                            <button type="submit" id="publish_post">Publish Post</button>
-                                            <input type="hidden" value="{{ Session::token() }}" name="_token">
+                                        <div class="col-xs-12 center">
+                                            <br>
+                                            <button class="btn btn-primary" style="float: right;" type="submit" id="publish_post">Publish Post</button>
+                                            <input type="hidden" value="{{ Session::token() }}" name="_token"><br><br><br>
                                         </div>
                                     </div>
                                 </form>
