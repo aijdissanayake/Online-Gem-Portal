@@ -21,20 +21,23 @@
 		    padding-top: 0px;
 		  }
 		}
+		.shop-container{
+            padding: 0 5% 0 5%;
+        }
 	</style>
 </head>
 <body>
 
 	@include('layouts/navbar')
 
-	<div class="container">
+	<div class="shop-container">
 		<div class="row">
 			<div class="col-xs-3">
                 <h2><a href="#">{{$shop->user->name}} </a></h2>
                 <div class="list-group">
-                    <a href="#" class="list-group-item">Shop Front</a>
-                    <a href="#" class="list-group-item">All Gems</a>
-                    <a href="#" class="list-group-item">Inspect Live!</a>
+                    <a href="{{route('shop_front',['id' => $shop->id])}}" class="list-group-item">Shop Front</a>
+                    <a href="{{route('shop_gems',['id' => $shop->id])}}" class="list-group-item">All Gems</a>
+                    <a style="background-color: #dcdcdc;" href="#" class="list-group-item">Inspect Live!</a>
                 </div>
                 <br><br>
                 <div>

@@ -1,21 +1,78 @@
 @extends('layouts.app')
 @section('styles')
     <link href="css/shop/shopfront.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+          padding-top: 60px;
+        }
+        @media (max-width: 979px) {
+          body {
+            padding-top: 0px;
+          }
+        }
+
+.slide-image {
+    width: 100%;
+}
+
+.carousel-holder {
+    margin-bottom: 30px;
+}
+
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
+
+.caption {
+    height: 130px;
+    overflow: hidden;
+}
+
+.caption h4 {
+    white-space: nowrap;
+}
+
+.thumbnail img {
+    width: 100%;
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+.shop-container{
+    padding: 0 5% 0 5%;
+}
+
+footer {
+    margin: 50px 0;
+}
+    </style>
 @endsection
 
 @section('content')
     <!-- Page Content -->
     <div class="shop-container">
-    <br><br><br><br>
 
         <div class="row">
 
             <div class="col-md-3">
                 <h2><a href="#">{{$shop->user->name}} </a></h2>
                 <div class="list-group">
-                    <a href="#" class="list-group-item">Shop Front</a>
-                    <a href="#" class="list-group-item">All Gems</a>
-                    <a href="#" class="list-group-item">Inspect Live!</a>
+                    <a style="background-color: #dcdcdc;" href="#" class="list-group-item">Shop Front</a>
+                    <a href="{{route('shop_gems',['id' => $shop->id])}}" class="list-group-item">All Gems</a>
+                    <a href="{{route('shop_live',['id' => $shop->id])}}" class="list-group-item">Inspect Live!</a>
                 </div>
                 <br><br>
                 <div>
@@ -34,7 +91,7 @@
                 <div class="row carousel-holder">
 
                     <div class="col-md-12">
-                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="1500">
                             <ol class="carousel-indicators">
                                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                                 <li data-target="#carousel-example-generic" data-slide-to="1"></li>

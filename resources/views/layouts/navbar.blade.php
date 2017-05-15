@@ -73,7 +73,7 @@
 
                                     <li> <a href="{{route('profile_view')}}"> View Profile </a> </li>
                                     @if(Auth::user()->role != 'buyer')
-                                    <li><a href="{{route('visit_shop',['id' => Auth::user()->shop->id])}}">View Shopfront </a></li>
+                                    <li><a href="{{route('shop_front',['id' => Auth::user()->shop->id])}}">View Shopfront </a></li>
                                     @endif
                                     <li> <a href="{{route('update_view')}}"> Update Profile </a></li>
                                     <li role="separator" class="divider"></li>
