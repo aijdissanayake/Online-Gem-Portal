@@ -1,5 +1,5 @@
-        <nav class="navbar navbar-default navbar-static-top">
-            <div style="margin-right: 1%">
+        <nav class="navbar navbar-inverse navbar-fixed-top" >
+            <div  style="margin-right: 1%; margin-left:2%">
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -12,7 +12,6 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <!-- {{ config('app.name', 'Laravel') }} -->
                         Gem Portal
                     </a>
                 </div>

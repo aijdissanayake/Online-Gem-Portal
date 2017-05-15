@@ -12,9 +12,21 @@
 	<script src="https://cdn.pubnub.com/pubnub-3.7.14.min.js"></script>
 	<script src="https://cdn.pubnub.com/webrtc/webrtc.js"></script>
 	<script src="https://cdn.pubnub.com/webrtc/rtc-controller.js"></script>
+	<style type="text/css">
+		body {
+		  padding-top: 60px;
+		}
+		@media (max-width: 979px) {
+		  body {
+		    padding-top: 0px;
+		  }
+		}
+	</style>
 </head>
 <body>
+
 	@include('layouts/navbar')
+
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-4">

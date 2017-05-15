@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    return view('ck');
+    return view('new');
 });
 
 

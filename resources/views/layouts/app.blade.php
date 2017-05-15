@@ -22,6 +22,16 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+    <style type="text/css">
+        body {
+          padding-top: 60px;
+        }
+        @media (max-width: 979px) {
+          body {
+            padding-top: 0px;
+          }
+        }
+    </style>
 
      @yield('styles')
 
