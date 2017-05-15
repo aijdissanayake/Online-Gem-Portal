@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    return view('dashboard');
+    return view('home');
 });
 
 
@@ -49,6 +49,12 @@ Route::group(['middleware' => 'auth'], function () {
 		})->name('admin_dash_board');
 
 		Route::post('/admin/create-post','AdminController@createPost')->name('create_post');
+
+		Route::get('/admin/update-post/{id}','AdminController@viewUpdatePost')->name('view_update_post');
+
+		Route::post('/admin/update-post','AdminController@updatePost')->name('update_post');
+
+		Route::get('/admin/de-activate-post/{id}','AdminController@deActivatePost')->name('de_activate_post');
 
 
 	});
