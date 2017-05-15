@@ -8,12 +8,12 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 
-    /*
-    //Show these image/flash browsing feature only to Admins
-    config.filebrowserBrowseUrl = '/kcfinder-3.12/browse.php?opener=ckeditor&type=files';
-    config.filebrowserImageBrowseUrl = '/kcfinder-3.12/browse.php?opener=ckeditor&type=images';
-    config.filebrowserFlashBrowseUrl = '/kcfinder-3.12/browse.php?opener=ckeditor&type=flash';
-    */
+    
+    // //Show these image/flash browsing feature only to Admins
+    // config.filebrowserBrowseUrl = '/kcfinder-3.12/browse.php?opener=ckeditor&type=files';
+    // config.filebrowserImageBrowseUrl = '/kcfinder-3.12/browse.php?opener=ckeditor&type=images';
+    // config.filebrowserFlashBrowseUrl = '/kcfinder-3.12/browse.php?opener=ckeditor&type=flash';
+    
 
     /* Image/Flash upload feauture using kcfinder tool */
     config.filebrowserUploadUrl = '/kcfinder-3.12/upload.php?opener=ckeditor&type=files';
