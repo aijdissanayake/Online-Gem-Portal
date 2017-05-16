@@ -73,15 +73,14 @@
         </style>
     </head>
     <body>
-    <div class="wide">
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}"><font color="white"><b>Home</b></font></a>
+                        <a href="{{ url('/home') }}"><font color="black"><b>Home</b></font></a>
                     @else
-                        <a href="{{ url('/login') }}"><font color="white"><b>Login</b></font></a>
-                        <a href="{{ url('/register') }}"><font color="white"><b>Register</b></font></a>
+                        <a href="{{ url('/login') }}"><font color="black"><b>Login</b></font></a>
+                        <a href="{{ url('/register') }}"><font color="black"><b>Register</b></font></a>
                     @endif
                 </div>
             @endif
@@ -90,12 +89,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <font color="white"><b>Gem Portal</b></font>
+                    <font color="black">Gem Portal</font>
                 </div>
-               <font color="white" size="6"> <b>Connect You With Gem Stone Buyers and Seller All around the World!</b> </font>
+               <font color="black" size="6"> <b>Connect You With Gem Stone Buyers and Seller All around the World!</b> </font>
             </div>
         </div>
-    </div>
     <div class="container">
   <div class="text-center">
   </div>
