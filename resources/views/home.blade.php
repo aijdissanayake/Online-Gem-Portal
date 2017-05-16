@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-9">
-                <h1>Gem News</h1>
+                <h1><b>Gem News</b></h1>
             </div>
             <div class="col-md-3">
                 <a href=""><h1>New Arrivals</h1></a>
@@ -17,6 +17,8 @@
     <div class="row">
         {{--Display General Posts--}}
         <div class="col-md-9" style="padding: 5%">
+                <h2><b>Top Stories Today</b></h2>
+                <hr style="border: 1px solid #ccc;">
                 @if(Auth::user()->role == 'buyer')
                 <?php $posts = App\Post::where('buyer', true)->where('deleted', false)->orderBy('id', 'DESC')->take(10)->get() ?>
                 @elseif(Auth::user()->role == 'shop')

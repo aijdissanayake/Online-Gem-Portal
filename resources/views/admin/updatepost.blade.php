@@ -97,6 +97,15 @@
                                 </div>
                             </div>
                             <br>
+
+                            <br>
+                            <div class="row">
+                                <label>For :</label> &nbsp;&nbsp;
+                                <input type="checkbox" name="shop">Shops &nbsp;&nbsp;
+                                <input type="checkbox" name="buyer">Buyers 
+                            </div>
+                            <br>
+                            
                             {{-- Input text body --}}
                             <div class="row">
                                 <div>

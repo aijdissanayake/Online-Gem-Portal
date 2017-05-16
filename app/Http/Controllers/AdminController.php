@@ -18,7 +18,7 @@ class AdminController extends Controller
         $post = new Post();
         $post->title = $request['title'];
         $post->body = $request['body'];
-        $post->buyer = $request['shop'] ? true : false;
+        $post->shop = $request['shop'] ? true : false;
         $post->buyer = $request['buyer'] ? true : false;
 
         $message = 'There was an error';
@@ -46,6 +46,8 @@ class AdminController extends Controller
         $post = Post::find($request['id']);
         $post->title = $request['title'];
         $post->body = $request['body'];
+        $post->shop = $request['shop'] ? true : false;
+        $post->buyer = $request['buyer'] ? true : false;
 
         $message = 'There was an error';
         if ($post->save())
