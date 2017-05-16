@@ -16,7 +16,7 @@ class GemTypeTest extends TestCase
     public function testRemove()
     {
         $this->assertTrue(GemType::remove(1));
-        $this->assertFalse(GemType::remove(25));
+        $this->assertFalse(GemType::remove(100));
     }
 
     public function testCreate(){

@@ -62,26 +62,43 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            .wide {
+              width:100%;
+              height:100%;
+              height:calc(100% - 1px);
+              background: rgba(0,0,0,0.4);
+              background-size:cover;
+              
+            }
         </style>
     </head>
     <body>
+    <div class="wide">
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}"><font color="white"><b>Home</b></font></a>
                     @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
+                        <a href="{{ url('/login') }}"><font color="white"><b>Login</b></font></a>
+                        <a href="{{ url('/register') }}"><font color="white"><b>Register</b></font></a>
                     @endif
                 </div>
             @endif
 
+            
+
             <div class="content">
                 <div class="title m-b-md">
-                    Gem Portal
+                    <font color="white"><b>Gem Portal</b></font>
                 </div>
+               <font color="white" size="6"> <b>Connect You With Gem Stone Buyers and Seller All around the World!</b> </font>
             </div>
         </div>
+    </div>
+    <div class="container">
+  <div class="text-center">
+  </div>
+</div>
     </body>
 </html>
