@@ -29,7 +29,7 @@
 								<div class="col-sm-9">
 								<h3><b><a href="{{route('gem_stone',['id' => $gemStone->id])}}">{{$gemStone->type->type}}</a></b></h3>
 								@if($gemStone->shop->user->role != 'admin')
-								<a href="{{route('visit_shop',['id'=>$gemStone->shop_id])}}" >
+								<a href="{{route('shop_front',['id' => $gemStone->shop_id])}}" >
 								<b>{{$gemStone->shop->user->name}}</b><br>
 								</a>
 								@endif
